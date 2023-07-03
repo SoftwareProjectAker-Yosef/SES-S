@@ -83,5 +83,16 @@
         
     });
 
+    function previewImage(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imageContainer = document.getElementById('image-container');
+            imageContainer.style.backgroundImage = 'url(' + reader.result + ')';
+        };
+        reader.readAsDataURL(file);
+    }
+
+
 
 })(jQuery);

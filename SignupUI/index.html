@@ -56,9 +56,19 @@
 	<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 		<div class="wrap-login100" style="width:800px ">
 			<form class="login100-form validate-form">
-				<span class="login100-form-logo">
-					<!-- Picture input !-->
-				</span>
+
+				<div class="login100-form-logo">
+					<!-- Image input field -->
+					<div class="image-upload">
+						<label for="upload" class="upload-label">
+							<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+
+						</label>
+						<div class="image-preview">
+							<div id="image-container" class="circle"></div>
+						</div>
+					</div>
+				</div>
 
 				<span class="login100-form-title p-b-34 p-t-27">
 					Sign Up
@@ -97,9 +107,9 @@
 				</div>
 
 
-					<div class="form-group validate-input" data-validate="Age" style="border-style: ridge; border-top: 1px; border-bottom: 1px">
+					<div class="form-group validate-input" data-validate="Enter Age" style="border-style: ridge; border-top: 1px; border-bottom: 1px">
 						<input class="input100" type="number" name="age" placeholder="Enter Age">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+
 					</div>
 				<div class="form-row">
 					<div class="form-group validate-input" data-validate="Enter Country" style="border-style: ridge; border-top: 1px; border-bottom: 1px; " >
@@ -352,17 +362,17 @@
 							<option value="Zambia">Zambia</option>
 							<option value="Zimbabwe">Zimbabwe</option>
 						</select>
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+
 					</div>
 					<div class="form-group validate-input" data-validate="Enter City" style="border-style: ridge; border-top: 1px; border-bottom: 1px">
 						<i class="input-icon fas fa-map-marker-alt"></i>
 						<input class="input100" type="text" name="city" placeholder="Enter City">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+
 					</div>
 					<div class="form-group validate-input" data-validate="Enter Address" style="border-style: ridge; border-top: 1px; border-bottom: 1px">
 						<i class="input-icon fas fa-map-marker-alt"></i>
 						<input class="input100" type="text" name="address" placeholder="Enter Address">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+
 					</div>
 				</div>
 
