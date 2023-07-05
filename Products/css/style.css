@@ -627,7 +627,7 @@ header .navbar-default .navbar-header {
 	min-height: 280px;
 	margin-bottom: 30px;
 	position: relative;
-	border-bottom: solid #007dea 3px;
+	border: solid #007dea 3px;
 	transition: ease all 0.5s;
 }
 
