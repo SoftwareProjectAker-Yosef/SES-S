@@ -1,22 +1,27 @@
-/****************************
-**  Style for all devices  **
-****************************/
+* {
+    margin: 0;
+    padding: 0
+}
 
-/*
-General
-*/
+html {
+    height: 100%
+}
 
-body{
-  font-family: sans-serif;
- }
+p {
+    color: grey
+}
 
-section {
-  border-bottom: solid thin rgb(220,220,220);
- }
+#heading {
+    text-transform: uppercase;
+    color: #22b3c1;
+    font-weight: normal
+}
 
-/*
-Page header
-*/
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
 
 
 .nav-pills-a.nav-pills .nav-link {
@@ -265,7 +270,6 @@ Page header
     transform: scaleX(1);
     -webkit-transform-origin: left;
     transform-origin: left;
-    color: #000000;
 }
 
 .navbar-default.navbar-trans .show > .nav-link:before,
@@ -348,7 +352,7 @@ Page header
 }
 
 .navbar-default .dropdown .dropdown-menu .dropdown-item:hover {
-    background-color: #000000;
+    background-color: #ffffff;
     color: #22b3c1;
     transition: all 500ms ease;
 }
@@ -364,11 +368,6 @@ Page header
     visibility: visible;
     opacity: 1;
     filter: alpha(opacity=1);
-}
-
-.nav-link:hover{
-    color: #000000;
-    text-decoration: none;
 }
 
 /*------/ Hamburger Navbar /------*/
@@ -426,203 +425,203 @@ Page header
     opacity: 0.9;
 }
 
-
-/*
-Section headings
- */
-
-h1, h2, h3, h4, h5, h6, h7 {
-  font-family: serif;
-  font-weight: normal;
- }
-
-h1 {
-  text-align: center;
- }
-
-/*
-Navigation
-*/
-div{
-  margin: 2em;
-  flex-wrap: wrap;
-  overflow-wrap: break-word;
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
 }
 
-
-
-/*
-General content elements and styles
-*/
-
-ul, ol {
-  color: #024f70;
-  font-weight: bold;
-  font-family: serif;
-  font-size: 1.2em;
- }
-
-ul {
-  list-style: square outside;
- }
-
-ol span {
-  color: black;
-  font-weight: normal;
-  font-family: sans-serif;
-  font-size: 0.84em;
- }
- 
-ul span {
-  color: black;
-  font-weight: normal;
-  font-family: sans-serif;
-  font-size: 0.84em;
- }
- 
-blockquote {
-  border-left: solid thick #024f70;
- }
- 
-em {
-  font-style: italic;
- }
-
-strong {
-  font-weight: bold;
-  color: #024f70;
- }
-
-/* Nav to-top elements */
-
-/********************************************
-**  Style for devices with small displays  **
-********************************************/
-@media (max-width: 768px) {
-
-    /*
-    General
-    */
-    section {
-        margin: 0 -0.5em 1em -0.5em;
-        padding: 0 0.5em 1em 0.5em;
-    }
-
-    /*
-    Page header
-    */
-    header h1 {
-        padding: 0.5em 0 0 0;
-        font-size: 2.5em;
-    }
-
-    /*
-    Section headings
-     */
-    h2, h3, h4, h5, h6, h7 {
-        margin: 0.2em 0 0 1em;
-        padding: 0.1em;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        /*  margin: 0 0 1em 0;*/
-    }
-
-    h2 {
-        font-size: 1.2em;
-    }
-
-    h3 {
-        font-size: 1.13em;
-    }
-
-    h4 {
-        font-size: 1.07em;
-    }
-
-
-    /*
-    Navigation
-    */
-    /* Nav bar */
-    /********************************************
-    **  Style for devices with large displays  **
-    ********************************************/
-    @media (min-width: 992px) {
-
-
-        /*
-        General
-        */
-        section {
-            margin: 0 -0.5em 1em -0.5em;
-            padding: 2em 8% 2em 8%;
-        }
-
-
-        /*
-        Page header
-        */
-        header {
-            margin: 0 -0.5em 0 -0.5em;
-        }
-
-        header h1 {
-            padding: 0.5em 0 0 0;
-            font-size: 4em;
-        }
-
-
-        /*
-        Section headings
-         */
-        h2, h3, h4, h5, h6, h7 {
-            margin: 0.8em 0 0 7%;
-            padding: 0.2em;
-        }
-
-        h1 {
-            font-size: 2em;
-            text-align: center;
-            margin: 0 0 1em 0;
-        }
-
-        h2 {
-            font-size: 1.65em;
-        }
-
-        h3 {
-            font-size: 1.4em;
-        }
-
-        h4 {
-            font-size: 1.15em;
-        }
-
-
-        /*
-        Other content elements
-        */
-        blockquote {
-            padding: 0 0 0 1.2em;
-            margin: 0 6em 0 4em;
-        }
-
-        ul, ol {
-            padding: 0 6em 0 6em;
-        }
-    }
+.form-card {
+    text-align: left
 }
-/*
-Navigation
-*/
 
-/* Nav bar */
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
 
-/**************************
-**  Style for printouts  **
-**************************/
+#msform input,
+#msform textarea {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    color: #2C3E50;
+    background-color: #ECEFF1;
+    font-size: 16px;
+    letter-spacing: 1px
+}
 
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #22b3c1
+;
+    outline-width: 0
+}
 
+#msform .action-button {
+    width: 100px;
+    background: #22b3c1
+;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5pxna;
+    float: right
+}
 
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #000000
+;
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: #000000
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #22b3c1
+;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left
+}
+
+.purple-text {
+    color: #22b3c1
+;
+    font-weight: normal
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #22b3c1
+;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f13e"
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007"
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f030"
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c"
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #22b3c1
+;
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color: #22b3c1
+;
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}

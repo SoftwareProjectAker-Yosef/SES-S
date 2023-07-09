@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Multi-step form</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'><link rel="stylesheet" href="../multi-step-form/dist/style.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top " style="position: absolute">
+    <div class="container">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+                aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="../../index.html" class="logo">
+            <img src="../multi-step-form/dist/Screenshot_2023-07-02_at_13.13.32-removebg.png" alt="" style="width: 250px;  ">
+        </a>
+        <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
+                data-target="#navbarTogglerDemo01" aria-expanded="false">
+            <span class="fa fa-search" aria-hidden="true"></span>
+        </button>
+        <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../Houses/index.html" style="margin-left: 10px; margin-right: 10px;">Residences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Houses/about.html" style="margin-left: 10px; margin-right: 10px;">Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewHousesTenant.html" style="margin-left: 10px; margin-right: 10px;">Furniture</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Houses/blog-grid.html" style="margin-left: 10px; margin-right: 10px;">Payments</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="margin-left: 10px; margin-right: 10px;">Log Out</a>
+                </li>
+
+
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+
+
+
+<!-- partial:index.partial.html -->
+<div class="container-fluid" style="padding-top: 10rem;">
+    <div class="row justify-content-center">
+        <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2 id="heading">Sell Your Furniture</h2>
+                <p>Fill all form field to go to next step</p>
+                <form id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active" id="account"><strong>Account</strong></li>
+                        <li id="personal"><strong>Personal</strong></li>
+                        <li id="payment"><strong>Image</strong></li>
+                        <li id="confirm"><strong>Finish</strong></li>
+                    </ul>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> <br> <!-- fieldsets -->
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Account Information:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 1 - 4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" />  <label class="fieldlabels">Password: *</label> <input type="password" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" name="cpwd" placeholder="Confirm Password" />
+                        </div> <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Personal Information:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 2 - 4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+
+                        </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Image Upload:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 3 - 4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*">
+                            <label class="fieldlabels">Discription: *</label> <input type="text" name="disc" placeholder="Discription" />
+                            <label class="fieldlabels">Furniture Type:*</label>
+                            <select id="furnituretype" name="furnituretype" class="form-control" style="background-color: #ECEFF1;" >
+                                <option value="None">Choose Type</option>
+                                <option value="Chair">Chair</option>
+                                <option value="Table">Table</option>
+                                <option value="Closet">Closet</option>
+                                <option value="Bed">Bed</option>
+                                <option value="Sofa">Sofa</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <label class="fieldlabels">Price:</label> <input type="number" name="pic" placeholder="Price" >
+                            <label class="fieldlabels">Currency:</label>
+                            <select id="Currency" name="Currency" class="form-control "  style="background-color: #ECEFF1;">
+                                <option value="Dollars">Dollars</option>
+                                <option value="Euros">Euros</option>
+                                <option value="Shekels">Shekels</option>
+                                <option value="Dinars">Jordanian Dinars</option>
+
+                            </select>
+                        </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Finish:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 4 - 4</h2>
+                                </div>
+                            </div> <br><br>
+                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                            <div class="row justify-content-center">
+                                <div class="col-3"> <img src="https://t4.ftcdn.net/jpg/02/72/79/67/360_F_272796737_1gfclSQF8yzFHZeE2XX5513eOQMV53dw.jpg" class="fit-image"> </div>
+                            </div> <br><br>
+                            <div class="row justify-content-center">
+                                <div class="col-7 text-center">
+                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script  src="../multi-step-form/dist/script.js"></script>
+
+</body>
+</html>
