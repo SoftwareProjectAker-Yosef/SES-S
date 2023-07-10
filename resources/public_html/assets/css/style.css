@@ -115,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   list-style: none;
 }
 .nav-menu > ul > li {
-  position: relative;
+  position: absolute;
   white-space: nowrap;
 }
 .nav-menu a, .nav-menu a:focus {
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6 {
 * Mobile Navigation
 */
 .mobile-nav-toggle {
-  position: fixed;
+  position: absolute;
   right: 10px;
   top: 10px;
   z-index: 9998;
@@ -995,6 +995,126 @@ section {
 .sub:hover {
   background: #59C7F0;
 }
+.nav-pills-a.nav-pills .nav-link {
+  color: #000000;
+  position: relative;
+  font-weight: 600;
+}
+
+.nav-pills-a.nav-pills .nav-link.active {
+  background-color: transparent;
+}
+
+.nav-pills-a.nav-pills .nav-link.active:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background-color: #22b3c1;
+  z-index: 2;
+}
+
+.navbar-default.navbar-trans .nav-link,
+.navbar-default.navbar-reduce .nav-link {
+  font-size: 1.1rem;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 0.030em;
+  transition: all 0.1s ease-in-out;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar-default.navbar-trans .nav-link:before,
+.navbar-default.navbar-reduce .nav-link:before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+  background-color: #22b3c1;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: right;
+  transform-origin: right;
+  transition: opacity .2s ease-out 0.3s, -webkit-transform .2s ease-out;
+  transition: transform .2s ease-out, opacity .2s ease-out 0.3s;
+  transition: transform .2s ease-out, opacity .2s ease-out 0.3s, -webkit-transform .2s ease-out;
+}
+
+.navbar-default.navbar-trans .nav-link:hover,
+.navbar-default.navbar-reduce .nav-link:hover {
+  color: #000000;
+}
+
+.navbar-default.navbar-trans .nav-link:hover:before,
+.navbar-default.navbar-reduce .nav-link:hover:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+
+.navbar-default.navbar-trans .show > .nav-link:before,
+.navbar-default.navbar-trans .active > .nav-link:before,
+.navbar-default.navbar-trans .nav-link.show:before,
+.navbar-default.navbar-trans .nav-link.active:before,
+.navbar-default.navbar-reduce .show > .nav-link:before,
+.navbar-default.navbar-reduce .active > .nav-link:before,
+.navbar-default.navbar-reduce .nav-link.show:before,
+.navbar-default.navbar-reduce .nav-link.active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.navbar-default.navbar-trans .nav-link:before {
+  background-color: #000000;
+}
+
+.navbar-default.navbar-trans .nav-link:hover {
+  color: #000000;
+}
+
+.navbar-default.navbar-trans .show > .nav-link,
+.navbar-default.navbar-trans .active > .nav-link,
+.navbar-default.navbar-trans .nav-link.show,
+.navbar-default.navbar-trans .nav-link.active {
+  color: #000000;
+}
+
+.navbar-default.navbar-reduce {
+  transition: all .5s ease-in-out;
+  padding-top: 19px;
+  padding-bottom: 19px;
+}
+
+.navbar-default.navbar-reduce .nav-link {
+  color: #000000;
+}
+
+.navbar-default.navbar-reduce .nav-link:before {
+  background-color: #000000;
+}
+
+.navbar-default.navbar-reduce .nav-link:hover {
+  color: #000000;
+}
+
+.navbar-default.navbar-reduce .show > .nav-link,
+.navbar-default.navbar-reduce .active > .nav-link,
+.navbar-default.navbar-reduce .nav-link.show,
+.navbar-default.navbar-reduce .nav-link.active {
+  color: #ffffff;
+}
+
+.navbar .container .nav-link{
+  color: #ffffff;
+}
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);
@@ -1058,6 +1178,7 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
 #footer .copyright {
   margin: 0 0 5px 0;
 }
