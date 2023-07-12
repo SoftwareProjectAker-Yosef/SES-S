@@ -574,7 +574,7 @@ p {
 
 #progressbar #payment:before {
     font-family: FontAwesome;
-    content: "\f030"
+    content: "\f05a"
 }
 
 #progressbar #confirm:before {

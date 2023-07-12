@@ -5,6 +5,9 @@
   <title>CodePen - Multi-step form</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'><link rel="stylesheet" href="../multi-step-form/dist/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 <body>
@@ -52,7 +55,7 @@
           <ul id="progressbar">
             <li class="active" id="account"><strong>Account</strong></li>
             <li id="personal"><strong>Personal</strong></li>
-            <li id="payment"><strong>Image</strong></li>
+            <li id="payment"><strong>Information</strong></li>
             <li id="confirm"><strong>Finish</strong></li>
           </ul>
           <div class="progress">
@@ -67,10 +70,47 @@
                 <div class="col-5">
                   <h2 class="steps">Step 1 - 4</h2>
                 </div>
-              </div> <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" />  <label class="fieldlabels">Password: *</label> <input type="password" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" name="cpwd" placeholder="Confirm Password" />
+
+              </div> <label class="fieldlabels">Email: *</label> <input type="email" id="email" name="email" placeholder="Email Id" oninput="validateEmail()"/> <p id="emailError" style="color: red"></p> <label class="fieldlabels">Password: *</label> <input type="password" id="pwd" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" id="confirmPwd" name="confirmPwd" placeholder="Confirm Password" />
+
+
+              <script>
+                function validateEmail() {
+                  var email = document.getElementById("email").value;
+                  var re = /\S+@\S+\.\S+/;
+                  var errorElement = document.getElementById("emailError");
+
+                  if (re.test(email)) {
+                    errorElement.textContent = 'Valid email address';
+                    errorElement.style.color = 'green';
+                  } else {
+                    errorElement.textContent = 'Invalid email address';
+                    errorElement.style.color = 'red';
+                  }
+                }
+              </script>
+              <span id="message" ></span>
+              <script>
+                document.getElementById('confirmPwd').addEventListener('input', function () {
+                  var passwordInput = document.getElementById('pwd');
+                  var confirmPasswordInput = document.getElementById('confirmPwd');
+                  var message = document.getElementById('message');
+
+                  if (passwordInput.value !== confirmPasswordInput.value) {
+                    message.textContent = 'Passwords do not match';
+                    message.style.color = 'red';
+                  } else {
+                    message.textContent = 'Passwords match';
+                    message.style.color = 'green';
+                  }
+                });
+              </script>
+
             </div> <input type="button" name="next" class="next action-button" value="Next" />
+
           </fieldset>
-          <fieldset>
+
+          <fieldset id="Two">
             <div class="form-card">
               <div class="row">
                 <div class="col-7">
@@ -81,13 +121,14 @@
                 </div>
               </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
 
-            </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            </div> <input type="button" name="next" class="next action-button" value="Next" style="margin-top: 10px" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
           </fieldset>
+
           <fieldset>
             <div class="form-card">
               <div class="row">
                 <div class="col-7">
-                  <h2 class="fs-title">Image Upload:</h2>
+                  <h2 class="fs-title">Informations:</h2>
                 </div>
                 <div class="col-5">
                   <h2 class="steps">Step 3 - 4</h2>
@@ -101,7 +142,24 @@
                 <option value="Employee">Employee</option>
               </select>
 
-              <label class="fieldlabels">Age:*</label> <input type="number" name="Age" placeholder="Enter Your Age:" >
+              <label class="fieldlabels">Age:*</label> <input type="number" name="age" id="age"  placeholder="Enter Your Age:" pattern="\d{1,2}" maxlength="2" oninput="validateAge()" >
+                <span id="ageMessage"></span>
+
+                <script>
+                  var ageInput = document.getElementById('age');
+                  var tenantInput = document.getElementById('Type');
+
+                  ageInput.addEventListener('input', function(e) {
+                    if (ageInput.value.length > 2) {
+                      // If more than two numbers, remove the last character
+                      ageInput.value = ageInput.value.slice(0, 2);
+                    } else if (ageInput.value.length == 2) {
+                      // If exactly two numbers, move focus to the next field
+                      tenantInput.focus();
+                    }
+                  });
+                </script>
+
 
               <label class="fieldlabels">Type:*</label>
               <select id="Type" name="Type" class="form-control "  style="background-color: #ECEFF1;">
@@ -110,7 +168,23 @@
 
 
               </select>
-            </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+
+                <script>
+                  var UserType;
+
+                  document.getElementById('Type').addEventListener('change', function() {
+                    UserType = this.value === 'tenant' ? 0 : 1;
+                    console.log(UserType); //for testing purposes
+                  });
+                </script>
+            </div> <input type="button" name="next" class="next action-button" value="Submit" style="margin-top: 10px" /> <input type="button" id="previous2" name="previous" class= " action-button-previous" value="Previous" />
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+              <script>
+                $('#previous2').click(function() {
+                  // Change the view to the #two fieldset
+                  location.href = "";
+                });
+              </script>
             </div>
           </fieldset>
           <fieldset>
@@ -147,38 +221,28 @@
       <img src="Screenshot_2023-07-02_at_13.13.32-removebg.png" alt="" style="width: 250px;  ">
     </a>
 
-    <p class="footer-links">
-      <a href="#" class="link-1">Home</a>
 
-      <a href="#">Blog</a>
 
-      <a href="#">Pricing</a>
-
-      <a href="#">About</a>
-
-      <a href="#">Faq</a>
-
-      <a href="#">Contact</a>
-    </p>
-
-    <p class="footer-company-name">Company Name © 2015</p>
+    <p class="footer-company-name" style="color: #FFFFFF;padding-top: 3rem ">Sakancom © 2015</p>
   </div>
 
   <div class="footer-center">
 
     <div>
       <i class="fa fa-map-marker"></i>
-      <p><span>444 S. Cedros Ave</span> Solana Beach, California</p>
+      <p><span>Rafedyia Street</span> Nablus, Palestine</p>
     </div>
 
     <div>
       <i class="fa fa-phone"></i>
-      <p>+1.555.555.5555</p>
+      <p>+972595254709</p> </br>
+      <p style="padding-left: 4.5rem">+970598666558</p>
     </div>
 
     <div>
       <i class="fa fa-envelope"></i>
-      <p><a href="mailto:support@company.com">support@company.com</a></p>
+      <p><a href="mailto:yossalam261@gmail.com">yossalam261@gmail.com</a></p></br>
+      <p style="padding-left: 4.5rem"><a href="mailto:mohammadaker7@gmail.com">mohammadaker7@gmail.com</a></p>
     </div>
 
   </div>
@@ -187,15 +251,15 @@
 
     <p class="footer-company-about">
       <span>About the company</span>
-      Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+      Sakancom offers a diverse range of rental properties to suit every budget. With a commitment to service and transparency, we make finding your perfect home easy and enjoyable
     </p>
 
     <div class="footer-icons">
 
-      <a href="#"><i class="fa fa-facebook"></i></a>
-      <a href="#"><i class="fa fa-twitter"></i></a>
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-github"></i></a>
+      <a href="https://www.facebook.com/yusuf.salam.568/"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/YoSSalam2"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/yossalam8/"><i class="fa fa-linkedin"></i></a>
+      <a href="https://github.com/YoSSalam8"><i class="fa fa-github"></i></a>
 
     </div>
 
