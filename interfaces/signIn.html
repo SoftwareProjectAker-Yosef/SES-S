@@ -115,5 +115,47 @@
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
 
+<script>
+  $(document).ready(function(){
+    $(".login100-form-btn").click(function(event){
+      event.preventDefault();
+
+      // Retrieve email and password from the form
+      var email = $("input[name='email']").val();
+      console.log(email)
+      var password = $("input[name='pass']").val();
+
+      // Replace with your own endpoint URL
+      var url = "http://localhost:9090/user/checkUserExistence";
+
+      var data = {
+      // Data to be sent
+        email: email
+      };
+
+      $.ajax({
+        data: data,
+        url: url,
+        type: "GET",
+        success: function(response) {
+          var responseData = response;
+          console.log(responseData)
+
+          if(responseData===false){
+            console.log("faialed")
+          }
+          else
+            console.log("success")
+
+
+
+        },
+        error: function(error) {
+          console.log(Error);
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>

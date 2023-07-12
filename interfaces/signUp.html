@@ -6,7 +6,58 @@
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'><link rel="stylesheet" href="../multi-step-form/dist/style.css">
 
+
+
+  <script>
+    $(document).ready(function(){
+      $(".action-button").click(function(){
+        if($(this).val() === "Submit"){
+          var email = $("input[name='email']").val();
+          var pwd = $("input[name='pwd']").val();
+          var cpwd = $("input[name='cpwd']").val();
+          var fname = $("input[name='fname']").val();
+          var lname = $("input[name='lname']").val();
+          var phno = $("input[name='phno']").val();
+          var phno_2 = $("input[name='phno_2']").val();
+          var major = $("input[name='major']").val();
+          var workplace = $("#workplace").val();
+          var age = $("input[name='Age']").val();
+          var type = $("#Type").val();
+
+          var formData = {
+            email: email,
+            password: pwd,
+            firstName: fname,
+            lastName: lname,
+            phoneNumber: phno,
+            alternatePhoneNumber: phno_2,
+            universityMajor: major,
+            workplace: workplace,
+            age: age,
+            userType: 0
+          };
+
+          $.ajax({
+            url: 'localhost:9090/user/saveUser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            success: function (data) {
+              console.log('Form submitted successfully. Returned data: ', data);
+            },
+            error: function (request, status, error) {
+              console.error('Error: ', error);
+            }
+          });
+        }
+      });
+    });
+  </script>
 </head>
+
+
+
 <body>
 
 
@@ -202,6 +253,54 @@
 </footer>
 <!-- partial -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script  src="../multi-step-form/dist/script.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $(".action-button").click(function(){
+      if($(this).val() === "Submit"){
+        var email = $("input[name='email']").val();
+        var pwd = $("input[name='pwd']").val();
+        var cpwd = $("input[name='cpwd']").val();
+        var fname = $("input[name='fname']").val();
+        var lname = $("input[name='lname']").val();
+        var phno = $("input[name='phno']").val();
+        var phno_2 = $("input[name='phno_2']").val();
+        var major = $("input[name='major']").val();
+        var workplace = $("#workplace").val();
+        var age = $("input[name='Age']").val();
+        var type = $("#Type").val();
+
+        var formData = {
+          email: email,
+          password: pwd,
+          firstName: fname,
+          lastName: lname,
+          phoneNumber: phno,
+          alternatePhoneNumber: phno_2,
+          universityMajor: major,
+          workPlace: workplace,
+          age: age,
+          userType: 0
+        };
+
+        $.ajax({
+          url: 'http://localhost:9090/user/saveUser',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(formData),
+          dataType: 'json',
+          success: function (data) {
+            console.log('Form submitted successfully. Returned data: ', data);
+          },
+          error: function (request, status, error) {
+            console.error();
+          }
+        });
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
