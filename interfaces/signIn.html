@@ -109,26 +109,59 @@
       var password = $("input[name='pass']").val();
 
       // Replace with your own endpoint URL
-      var url = "http://localhost:9090/user/checkUserExistence";
+      var checkPasswordUrl = "http://localhost:9090/user/checkPassword";
+      var checkEmailUrl = "http://localhost:9090/user/checkUserExistence";
 
-      var data = {
+      var checkEmailData = {
       // Data to be sent
         email: email
       };
 
+      var checkPasswordData = {
+        // Data to be sent
+        email: email,
+        password: password
+      };
+
       $.ajax({
-        data: data,
-        url: url,
+        data: checkEmailData,
+        url: checkEmailUrl,
         type: "GET",
         success: function(response) {
           var responseData = response;
           console.log(responseData)
 
           if(responseData===false){
-            console.log("faialed")
+            console.log("faialed email")
           }
-          else
-            console.log("success")
+          else{
+            console.log("success email")
+
+          $.ajax({
+            data: checkPasswordData,
+            url: checkPasswordUrl,
+            type: "POST",
+            success: function(response) {
+              var responseData = response;
+              console.log(responseData)
+
+              if(responseData===false){
+                console.log("faialed pass")
+              }
+              else
+                setCookie('userEmail',email,1);
+              window.location.href = "tenantUserIndex.html";
+
+
+
+
+            },
+            error: function(error) {
+              console.log(Error);
+            }
+          });}
+
+
 
 
 
@@ -139,6 +172,17 @@
       });
     });
   });
+
+
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+  }
 </script>
 </body>
 </html>
