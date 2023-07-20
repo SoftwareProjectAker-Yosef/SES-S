@@ -243,6 +243,48 @@
 </script>
 -->
 <script>
+
+    function checkMonth() {
+        // Get the value from the input field
+        var rentDate = document.getElementById("rentDate").value;
+
+        // Extract the year and month from the input field value
+        var year = rentDate.slice(0,4);
+        var month = rentDate.slice(5,7);
+        var rentDateString = `${year}-${month.padStart(2, '0')}`;
+
+        // AJAX request: Get the rent date for the rent with ID 3
+        $.ajax({
+            url: "http://localhost:9090/rent/getRentDate",
+            type: "GET",
+            data: {
+                id: 3  // Pass the id as a query parameter
+            },
+            success: function(rentDateWithId3) {
+                // Extract the month from the rent date with ID 3
+                var monthFromRentWithId3 = rentDateWithId3.slice(5,7);
+                var yearFromRentWithId3= rentDateWithId3.slice(0,4)
+                // Check if the entered month is the same as the month from the rent date with ID 3
+                if (monthFromRentWithId3 == month) {
+                    if (yearFromRentWithId3==year) {
+                        alert("This month is already taken. Please choose a different month.");
+                        // Reset the value of the input field
+                        document.getElementById("rentDate").value = "";
+                    }
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+
+
+
+<script>
+
     $(document).ready(function(){
         $(".action-button").click(function(){
             if($(this).val() === "Submit") {
