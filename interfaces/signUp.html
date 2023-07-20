@@ -11,52 +11,7 @@
 
 
 
-  <script>
-    $(document).ready(function(){
-      $(".action-button").click(function(){
-        if($(this).val() === "Submit"){
-          var email = $("input[name='email']").val();
-          var pwd = $("input[name='pwd']").val();
-          var cpwd = $("input[name='cpwd']").val();
-          var fname = $("input[name='fname']").val();
-          var lname = $("input[name='lname']").val();
-          var phno = $("input[name='phno']").val();
-          var phno_2 = $("input[name='phno_2']").val();
-          var major = $("input[name='major']").val();
-          var workplace = $("#workplace").val();
-          var age = $("input[name='Age']").val();
-          var type = $("#Type").val();
 
-          var formData = {
-            email: email,
-            password: pwd,
-            firstName: fname,
-            lastName: lname,
-            phoneNumber: phno,
-            alternatePhoneNumber: phno_2,
-            universityMajor: major,
-            workplace: workplace,
-            age: age,
-            userType: 0
-          };
-
-          $.ajax({
-            url: 'localhost:9090/user/saveUser',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            dataType: 'json',
-            success: function (data) {
-              console.log('Form submitted successfully. Returned data: ', data);
-            },
-            error: function (request, status, error) {
-              console.error('Error: ', error);
-            }
-          });
-        }
-      });
-    });
-  </script>
 </head>
 
 
@@ -333,8 +288,18 @@
         var phno_2 = $("input[name='phno_2']").val();
         var major = $("input[name='major']").val();
         var workplace = $("#workplace").val();
-        var age = $("input[name='Age']").val();
-        var type = $("#Type").val();
+        var age = $("input[name='age']").val();
+        var userType =  document.getElementById('Type').selectedIndex;
+
+
+        var checkEmailUrl = "http://localhost:9090/user/checkUserExistence";
+        var addUser="http://localhost:9090/user/saveUser";
+
+
+        var checkEmailData = {
+          email: email
+        };
+
 
         var formData = {
           email: email,
@@ -346,22 +311,61 @@
           universityMajor: major,
           workPlace: workplace,
           age: age,
-          userType: 0
+          userType: userType
         };
 
+
+
+
+
         $.ajax({
-          url: 'http://localhost:9090/user/saveUser',
-          type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(formData),
-          dataType: 'json',
-          success: function (data) {
-            console.log('Form submitted successfully. Returned data: ', data);
+          data: checkEmailData,
+          url: checkEmailUrl,
+
+          type: "GET",
+          success: function(response) {
+            var responseData = response;
+            console.log(responseData)
+
+            if(responseData===true){
+              console.log("email exists")
+            }
+            else{
+              console.log("success email")
+
+              $.ajax({
+                data: JSON.stringify(formData),
+                url: addUser,
+                contentType: "application/json; charset=utf-8", // Set the content type to JSON
+                type: "POST",
+                success: function (data) {
+                  console.log('Form submitted successfully. Returned data: ', data);
+                },
+                error: function (request, status, error) {
+                  console.error();
+                }
+              });
+            }
+
+
+
+
+
           },
-          error: function (request, status, error) {
-            console.error();
+          error: function(error) {
+            console.log(Error);
           }
         });
+
+
+
+
+
+
+
+
+
+
       }
     });
   });
