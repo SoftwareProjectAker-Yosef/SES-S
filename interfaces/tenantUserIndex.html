@@ -278,73 +278,31 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="section-heading">
-            <h2 style="color: #FFFFFF">Visit One Of Our Countries Now</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+
+            <h2 style="color: whitesmoke">Visit One Of Our Countries Now</h2>
+
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-8">
           <div class="items">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="item">
-                  <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                      <div class="image">
-                        <img src="../wooxtravel-1.0.0/assets/images/country-01.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 col-sm-7">
-                      <div class="right-content">
-                        <h4>SWITZERLAND</h4>
-                        <span>Europe</span>
-                        <div class="main-button">
-                          <a href="../wooxtravel-1.0.0/about.html">Explore More</a>
-                        </div>
-                        <p>Woox Travel is a professional Bootstrap 5 theme HTML CSS layout for your website. You can use this layout for your commercial work.</p>
-                        <ul class="info">
-                          <li><i class="fa fa-user"></i> 8.66 Mil People</li>
-                          <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                          <li><i class="fa fa-home"></i> $1.100.200</li>
-                        </ul>
-                        <div class="text-button">
-                          <a href="../wooxtravel-1.0.0/about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="item">
-                  <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                      <div class="image">
-                        <img src="../wooxtravel-1.0.0/assets/images/country-02.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 col-sm-7">
-                      <div class="right-content">
-                        <h4>CARIBBEAN</h4>
-                        <span>North America</span>
-                        <div class="main-button">
-                          <a href="../wooxtravel-1.0.0/about.html">Explore More</a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        <ul class="info">
-                          <li><i class="fa fa-user"></i> 44.48 Mil People</li>
-                          <li><i class="fa fa-globe"></i> 275.400 km2</li>
-                          <li><i class="fa fa-home"></i> $946.000</li>
-                        </ul>
-                        <div class="text-button">
-                          <a href="../wooxtravel-1.0.0/about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="row" id="parentContainer">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <div class="col-lg-12">
                 <div class="item last-item">
                   <div class="row">
@@ -374,15 +332,42 @@
                   </div>
                 </div>
               </div>
+
+
+
               <div class="col-lg-12">
-                <ul class="page-numbers">
-                  <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-                </ul>
+                <div class="item last-item">
+                  <div class="row">
+                    <div class="col-lg-4 col-sm-5">
+                      <div class="image">
+                        <img id="residenceImage" src="" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-sm-7">
+                      <div class="right-content">
+                        <h4 id="residenceName"></h4>
+                        <span id="residenceRegion"></span>
+                        <div class="main-button">
+                          <a href="../wooxtravel-1.0.0/about.html">Explore More</a>
+                        </div>
+                        <p id="residenceDescription"></p>
+                        <ul class="info">
+                          <li><i class="fa fa-user"></i> <span id="residencePopulation"></span> People</li>
+                          <li><i class="fa fa-globe"></i> <span id="residenceTerritory"></span> km2</li>
+                          <li><i class="fa fa-home"></i> $<span id="residencePrice"></span></li>
+                        </ul>
+                        <div class="text-button">
+                          <a href="../wooxtravel-1.0.0/about.html">Need Directions ? <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+
+
+
             </div>
           </div>
         </div>
@@ -480,6 +465,145 @@
       clearInterval(bannerTimer);
       bannerTimer = setInterval(bannerSwitcher, 5000)
     });
+
+
+    $(document).ready(function() {
+      // Function to fetch residences data
+      function fetchResidences() {
+        $.ajax({
+          url: "http://localhost:9090/residence/getAll",
+          type: "GET",
+          success: function(response) {
+            // 'response' contains the data returned by the server
+            // Here, you can use the data as needed
+            console.log(response);
+
+            // For example, you can iterate over the residences and do something with them
+            let randomValues=generateThreeUniqueRandomNumbers(response.length);
+            console.log(randomValues)
+
+            const residencesContainer = document.getElementById("residencesContainer");
+
+
+
+
+            const residenceImage = document.getElementById("residenceImage");
+            const residenceName = document.getElementById("residenceName");
+            const residenceRegion = document.getElementById("residenceRegion");
+            const residenceDescription = document.getElementById("residenceDescription");
+            const residencePopulation = document.getElementById("residencePopulation");
+            const residenceTerritory = document.getElementById("residenceTerritory");
+            const residencePrice = document.getElementById("residencePrice");
+
+
+
+
+
+            for (let i = 0; i < 3; i++) {
+              const residence = response[randomValues[i]];
+
+              // Create the necessary elements
+              const itemDiv = document.createElement("div");
+              itemDiv.className = "col-lg-12";
+              const lastItemDiv = document.createElement("div");
+              lastItemDiv.className = "item last-item";
+              const rowDiv = document.createElement("div");
+              rowDiv.className = "row";
+              const imageDiv = document.createElement("div");
+              imageDiv.className = "col-lg-4 col-sm-5";
+              const imageElement = document.createElement("img");
+              imageElement.id = "residenceImage";
+              imageElement.src=residence.images[0];
+              imageElement.alt = "";
+              const contentDiv = document.createElement("div");
+              contentDiv.className = "col-lg-8 col-sm-7";
+              const rightContentDiv = document.createElement("div");
+              rightContentDiv.className = "right-content";
+              const residenceNameH4 = document.createElement("h4");
+              residenceNameH4.id = "residenceName";
+              residenceNameH4.textContent = residence.country;
+              const residenceRegionSpan = document.createElement("span");
+              residenceRegionSpan.id = "residenceRegion";
+              residenceRegionSpan.textContent = residence.city;
+              const mainButtonDiv = document.createElement("div");
+              mainButtonDiv.className = "main-button";
+              const exploreLink = document.createElement("a");
+              exploreLink.href = "../wooxtravel-1.0.0/about.html";
+              exploreLink.textContent = "Explore More";
+              const residenceDescriptionP = document.createElement("p");
+              residenceDescriptionP.id = "residenceDescription";
+              residenceDescriptionP.textContent = residence.description;
+              const infoUl = document.createElement("ul");
+              infoUl.className = "info";
+              const populationLi = document.createElement("li");
+              populationLi.innerHTML = '<i class="fa fa-user"></i> <span id="residencePopulation">' + residence.area + '</span> People';
+              const territoryLi = document.createElement("li");
+              territoryLi.innerHTML = '<i class="fa fa-globe"></i> <span id="residenceTerritory">' + residence.area + '</span> m2';
+              const priceLi = document.createElement("li");
+              priceLi.innerHTML = '<i class="fa fa-home"></i> $<span id="residencePrice">' + residence.price + '</span>';
+              const textButtonDiv = document.createElement("div");
+              textButtonDiv.className = "text-button";
+              const directionsLink = document.createElement("a");
+              directionsLink.href = "../wooxtravel-1.0.0/about.html";
+              directionsLink.innerHTML = 'Need Directions ? <i class="fa fa-arrow-right"></i>';
+
+              // Append child elements
+              itemDiv.appendChild(lastItemDiv);
+              lastItemDiv.appendChild(rowDiv);
+              rowDiv.appendChild(imageDiv);
+              imageDiv.appendChild(imageElement);
+              rowDiv.appendChild(contentDiv);
+              contentDiv.appendChild(rightContentDiv);
+              rightContentDiv.appendChild(residenceNameH4);
+              rightContentDiv.appendChild(residenceRegionSpan);
+              rightContentDiv.appendChild(mainButtonDiv);
+              mainButtonDiv.appendChild(exploreLink);
+              rightContentDiv.appendChild(residenceDescriptionP);
+              rightContentDiv.appendChild(infoUl);
+              infoUl.appendChild(populationLi);
+              infoUl.appendChild(territoryLi);
+              infoUl.appendChild(priceLi);
+              rightContentDiv.appendChild(textButtonDiv);
+              textButtonDiv.appendChild(directionsLink);
+
+              // Append the generated content to the parent container
+              const parentContainer = document.getElementById("parentContainer");
+              parentContainer.appendChild(itemDiv);
+            }
+
+
+
+
+
+
+
+
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      }
+
+      // Call the function when the page loads
+      fetchResidences();
+    });
+
+
+    function generateThreeUniqueRandomNumbers(x) {
+      if (x < 3) {
+        throw new Error("x should be greater than or equal to 3.");
+      }
+
+      const uniqueNumbers = new Set();
+
+      while (uniqueNumbers.size < 3) {
+        const randomNumber = Math.floor(Math.random() * x);
+        uniqueNumbers.add(randomNumber);
+      }
+
+      return Array.from(uniqueNumbers);
+    }
   </script>
 
   </body>
