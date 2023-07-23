@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>EstateAgency Bootstrap Template</title>
+  <title>Sakancom</title>
+  <link href="../resources/public_html/assets/img/loyintlogos/logow.svg" rel="icon">
+
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
+
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -39,95 +41,33 @@
   <div class="click-closed"></div>
   <!--/ Form Search Star /-->
   <div class="box-collapse">
-    <div class="title-box-d">
-      <h3 class="title-d">Search Property</h3>
-    </div>
     <span class="close-box-collapse right-boxed ion-ios-close"></span>
     <div class="box-collapse-wrap form">
       <form class="form-a">
-        <div class="row">
-          <div class="col-md-12 mb-2">
-            <div class="form-group">
-              <label for="Type">Keyword</label>
-              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="Type">Type</label>
-              <select class="form-control form-control-lg form-control-a" id="Type">
-                <option>All Type</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="city">City</label>
-              <select class="form-control form-control-lg form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bedrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bathrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="price">Min Price</label>
-              <select class="form-control form-control-lg form-control-a" id="price">
-                <option>Unlimite</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$150,000</option>
-                <option>$200,000</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <button type="submit" class="btn btn-b">Search Property</button>
-          </div>
+        <div class="form-group">
+          <h2 class="title-d" style="padding-bottom: 3rem">Rent Property</h2>
+          <label class="fieldlabels">Email Tenant: *</label>
+          <input type="email" id="email1" name="email1" placeholder="Email Tenant" oninput="validateEmail()"/>
+          <p id="emailError" style="color: red"></p>
+
+          <label class="fieldlabels">Email Owner: *</label>
+          <input type="email" id="email2" name="email2" placeholder="Email Owner" />
+
+          <label class="fieldlabels">ID: *</label>
+          <input type="number" id="ID" name="ID" placeholder="ID" />
+
+          <label class="fieldlabels">Rent Date: *</label>
+          <input type="month" name="rentDate" id="rentDate" onchange="checkMonth()" placeholder="RentDate" />
+
+          <label class="fieldlabels">For How Many Months: *</label>
+          <input type="number" name="no_Month" id="no_Month" placeholder="End Date" /><br>
+
+          <input type="button" name="next" class="next action-button" value="Submit" style="background-color: #22b3c1; color: whitesmoke;border: #22b3c1; width: 7rem; height: 3rem;border-radius: 3rem;font-size: larger" />
         </div>
       </form>
     </div>
   </div>
+
   <!--/ Form Search End /-->
 
   <!--/ Nav Star /-->
@@ -329,8 +269,11 @@
         </div>
 
       <div>
-        <button type="button" href="interfaces/RentHouse.html" style="margin: 7rem;margin-left:30rem; padding: 1rem;border-radius: 10px;padding-left:2rem;padding-right: 2rem; background-color: #22b3c1; font-size: larger "><b>RENT</b></button>
-      </div>
+        <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
+                data-target="#navbarTogglerDemo01" aria-expanded="false" style="margin-top: 7rem; margin-bottom: 7rem;margin-left: 30rem; width: 100px; height: 50px;color: whitesmoke;font-size: 20px;font-size: larger">
+          RENT
+        </button>      </div>
+
       </div>
     </div>
 
@@ -411,6 +354,85 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+
+  <script>
+
+    function checkMonth() {
+      // Get the value from the input field
+      var rentDate = document.getElementById("rentDate").value;
+
+      // Extract the year and month from the input field value
+      var year = rentDate.slice(0,4);
+      var month = rentDate.slice(5,7);
+      var rentDateString = `${year}-${month.padStart(2, '0')}`;
+
+      // AJAX request: Get the rent date for the rent with ID 3
+      $.ajax({
+        url: "http://localhost:9090/rent/getRentDate",
+        type: "GET",
+        data: {
+          id: 3  // Pass the id as a query parameter
+        },
+        success: function(rentDateWithId3) {
+          // Extract the month from the rent date with ID 3
+          var monthFromRentWithId3 = rentDateWithId3.slice(5,7);
+          var yearFromRentWithId3= rentDateWithId3.slice(0,4)
+          // Check if the entered month is the same as the month from the rent date with ID 3
+          if (monthFromRentWithId3 == month) {
+            if (yearFromRentWithId3==year) {
+              alert("This month is already taken. Please choose a different month.");
+              // Reset the value of the input field
+              document.getElementById("rentDate").value = "";
+            }
+          }
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+  </script>
+
+
+
+
+  <script>
+    $(document).ready(function(){
+      $(".action-button").click(function(){
+        if($(this).val() === "Submit") {
+          var email1 = $("input[name='email1']").val();
+          var email2 = $("input[name='email2']").val();
+          var id = $("input[name='ID']").val();
+          var Date = $("input[name='rentDate']").val();
+          var month = $("input[name='no_Month']").val();
+
+
+          var formData = {
+            email: email1,
+            ownerEmail: email2,
+            date: Date,
+            number:id,
+            noMonth:month,
+
+          };
+
+          $.ajax({
+            url: 'http://localhost:9090/rent/saveRent',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+
+            success: function (data) {
+              console.log('Form submitted successfully. Returned data: ', data);
+            },
+            error: function (request, status, error) {
+              console.error();
+            }
+          });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
