@@ -58,10 +58,29 @@
                   <h2 class="steps">Step 2 - 4</h2>
                 </div>
               </div>
+
+<div style="display: inline-block">
+              <label class="fieldlabels">Country: *</label>
+              <input type="text" name="country" placeholder="" />
+
+              <label class="fieldlabels">City: *</label>
+              <input type="text" name="city" placeholder="" />
               <label class="fieldlabels">Location: *</label>
-              <input type="text" name="location" placeholder="Address, City, Street, etc..." />
+              <input type="text" name="location" placeholder="Address, Street, etc..." />
+
+
+</div>
+
               <label class="fieldlabels">Floor number: *</label>
-              <input type="text" name="floor#" placeholder="How many floors does the residence have?" />
+              <input type="number" name="floor#" placeholder="How many floors does the residence have?" />
+
+              <label class="fieldlabels">Area:</label>
+              <input type="number" name="area" placeholder="Enter the total area of your residence in square meter" />
+
+              <label class="fieldlabels">Description:</label>
+              <input type="text" name="description" placeholder="Enter a slight description of your residence" />
+
+
             </div>
             <input type="button" name="next" class="next action-button" value="Next" />
             <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
@@ -82,6 +101,8 @@
 
               <label class="fieldlabels">Price:</label>
               <input type="number" name="price" placeholder="Please note that the price is in USD (United States Dollar)" />
+
+
               <div id="services-container">
                 <label class="fieldlabels">Services:</label>
                 <input type="text" name="service" placeholder="Enter a service" />
@@ -169,6 +190,10 @@
       var location = $("input[name='location']").val();
       var price = $("input[name='price']").val();
       var floorNum = $("input[name='floor#']").val();
+      var description = $("input[name='description']").val();
+      var area = $("input[name='area']").val();
+      var country = $("input[name='country']").val();
+      var city = $("input[name='city']").val();
 
       var addResidence = "http://localhost:9090/residence/saveResidence";
 
@@ -176,6 +201,10 @@
         ownerEmail: email,
         price: price,
         location: location,
+        description: description,
+        area: area,
+        city: city,
+        country: country,
         floorCount: floorNum,
         services: services,
         images: images
