@@ -88,7 +88,7 @@
                                 <div class="col-5">
                                     <h2 class="steps">Step 1 - 4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" />  <label class="fieldlabels">Password: *</label> <input type="password" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" name="cpwd" placeholder="Confirm Password" />
+                            </div> <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" />
                         </div> <input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
                     <fieldset>
@@ -100,7 +100,7 @@
                                 <div class="col-5">
                                     <h2 class="steps">Step 2 - 4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phone" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
 
                         </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
@@ -114,7 +114,6 @@
                                     <h2 class="steps">Step 3 - 4</h2>
                                 </div>
                             </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*">
-                            <label class="fieldlabels">Discription: *</label> <input type="text" name="disc" placeholder="Discription" />
                             <label class="fieldlabels">Furniture Type:*</label>
                             <select id="furnituretype" name="furnituretype" class="form-control" style="background-color: #ECEFF1;" >
                                 <option value="None">Choose Type</option>
@@ -125,15 +124,12 @@
                                 <option value="Sofa">Sofa</option>
                                 <option value="Others">Others</option>
                             </select>
-                            <label class="fieldlabels">Price:</label> <input type="number" name="pic" placeholder="Price" >
-                            <label class="fieldlabels">Currency:</label>
-                            <select id="Currency" name="Currency" class="form-control "  style="background-color: #ECEFF1;">
-                                <option value="Dollars">Dollars</option>
-                                <option value="Euros">Euros</option>
-                                <option value="Shekels">Shekels</option>
-                                <option value="Dinars">Jordanian Dinars</option>
+                            <label class="fieldlabels">Number of Item:</label> <input type="number" name="number" placeholder="How Many Items" >
+                            <label class="fieldlabels">Price In Dollar:</label> <input type="number" name="price" placeholder="Price In U.S Dollar" >
 
-                            </select>
+                            <label class="fieldlabels">Description:</label>
+                            <input type="text" name="description" placeholder="Enter a slight description of your residence" />
+
                         </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
                     <fieldset>
@@ -218,6 +214,75 @@
 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script  src="../multi-step-form/dist/script.js"></script>
+<script>
 
+
+    $(document).ready(function() {
+        $(document).ready(function () {
+
+            var images = [];
+
+
+
+
+
+            $("input[name='pic']").on("change", function (e) {
+                var files = e.target.files;
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
+
+                    reader.onload = (function (f) {
+                        return function (e) {
+                            var image = e.target.result;
+                            images.push(image);
+                        };
+                    })(file);
+
+                    reader.readAsDataURL(file);
+                }
+            });
+            $(".action-button").click(function () {
+                if ($(this).val() === "Submit") {
+                    var email = $("input[name='email']").val();
+                    var type = $("select[name='furnituretype']").val();
+                    var price = $("input[name='price']").val();
+                    var description = $("input[name='description']").val();
+                    var phone = $("input[name='phone']").val();
+                    var number = $("input[name='number']").val();
+
+
+                    var addFur = "http://localhost:9090/Fur/saveFur";
+
+                    var formData = {
+                        email: email,
+                        type: type,
+                        price: price,
+                        description: description,
+                        phone: phone,
+                        images: images,
+                        number:number,
+                    };
+
+                    $.ajax({
+                        data: JSON.stringify(formData),
+                        url: addFur,
+                        contentType: "application/json; charset=utf-8",
+                        type: "POST",
+                        success: function (data) {
+                            console.log('Form submitted successfully. Returned data:', data);
+                        },
+                        error: function (request, status, error) {
+                            console.error();
+                        }
+                    });
+                }
+            });
+        });
+
+    });
+
+
+</script>
 </body>
 </html>

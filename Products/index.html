@@ -89,7 +89,7 @@
 
                <div class="row clearfix">
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('table')">
                         <div class="box-img">
                            <h4>Table</h4>
                            <div class="imgimg">
@@ -99,7 +99,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('closet')">
                         <div class="box-img">
                            <h4>Closet</h4>
                            <div class="imgimg2">
@@ -109,7 +109,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('bed')">
                         <div class="box-img">
                            <h4>Bed</h4>
                            <img src="images/product/5.png" alt="">
@@ -117,7 +117,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('chair')">
                         <div class="box-img">
                            <h4>Chair</h4>
                            <img src="images/product/2.png" alt="">
@@ -125,7 +125,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('sofa')">
                         <div class="box-img">
                            <h4>Sofa</h4>
                            <img src="images/product/12.png" alt="">
@@ -133,7 +133,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html">
+                     <a href="productpage.html" onclick="setCookie('others')">
                         <div class="box-img">
                            <h4>Others</h4>
                            <div class="imgimg3">
@@ -163,5 +163,12 @@
       <script src="js/wow.min.js"></script>
       <!--custom js-->
       <script src="js/custom.js"></script>
+   <script>
+      function setCookie(item) {
+         alert(item);
+         document.cookie = "selectedItem=" + item + "; path=/";
+
+      }
+   </script>
    </body>
 </html>
