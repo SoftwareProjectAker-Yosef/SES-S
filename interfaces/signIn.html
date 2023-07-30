@@ -152,7 +152,40 @@
               }
               else
                 setCookie('userEmail',email,1);
-              window.location.href = "tenantUserIndex.html";
+
+              $.ajax({
+                data: checkEmailData,
+                url: "http://localhost:9090/user/getUser",
+                type: "GET",
+                success: function (response) {
+                  console.log(response.userType);
+
+
+
+                if(response.userType == 0)
+              {
+                console.log("tenant");
+
+                window.location.href = "tenantUserIndex.html";
+
+              }
+            else
+              if (response.userType == 1) {
+                console.log("owner");
+                window.location.href = "ownerUserIndex.html";
+
+              } else {
+                console.log("adminnnn");
+              }
+
+
+            } ,
+                error: function(error) {
+                  console.log(Error);
+                }
+              });
+
+
 
 
 
