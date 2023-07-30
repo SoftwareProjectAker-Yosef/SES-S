@@ -17,7 +17,7 @@
   <div class="row justify-content-center">
     <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
       <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-        <h2 id="heading">Sell Your Furniture</h2>
+        <h2 id="heading">Rent your property!</h2>
         <p>Fill all form field to go to next step</p>
         <form id="msform">
           <!-- progressbar -->
@@ -43,7 +43,7 @@
                 </div>
               </div>
               <label class="fieldlabels">Owner Email: *</label>
-              <input type="email" name="email" placeholder="Email Id" />
+              <input type="email" name="email" id="ownerEmail" readonly />
             </div>
             <input type="button" name="next" class="next action-button" value="Next" />
           </fieldset>
@@ -152,6 +152,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../multi-step-form/dist/script.js"></script>
 <script>
+  document.getElementById("ownerEmail").placeholder=getCookie("userEmail");
+
+
   $(document).ready(function(){
     var services = [];
     var images = [];
@@ -224,6 +227,24 @@
       });
     });
   });
+
+
+
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+      if (c.indexOf(nameEQ) === 0) {
+        return decodeURIComponent(c.substring(nameEQ.length, c.length));
+      }
+    }
+    return null;
+  }
 
 </script>
 </body>
