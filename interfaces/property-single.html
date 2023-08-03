@@ -26,13 +26,9 @@
   <!-- Main Stylesheet File -->
   <link href="../Houses/css/style.css" rel="stylesheet">
 
-  ->
-</head>
 
 <body>
 
-<div class="click-closed"></div>
-<!--/ Form Search Star /-->
 <div class="box-collapse">
   <div class="title-box-d">
     <h3 class="title-d">Search Property</h3>
@@ -41,83 +37,28 @@
   <div class="box-collapse-wrap form">
     <form class="form-a">
       <div class="row">
-        <div class="col-md-12 mb-2">
-          <div class="form-group">
-            <label for="Type">Keyword</label>
-            <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
+        <div class="form-card">
+          <div class="row">
           </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="Type">Type</label>
-            <select class="form-control form-control-lg form-control-a" id="Type">
-              <option>All Type</option>
-              <option>For Rent</option>
-              <option>For Sale</option>
-              <option>Open House</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="city">City</label>
-            <select class="form-control form-control-lg form-control-a" id="city">
-              <option>All City</option>
-              <option>Alabama</option>
-              <option>Arizona</option>
-              <option>California</option>
-              <option>Colorado</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <select class="form-control form-control-lg form-control-a" id="bedrooms">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="garages">Garages</label>
-            <select class="form-control form-control-lg form-control-a" id="garages">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <select class="form-control form-control-lg form-control-a" id="bathrooms">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="price">Min Price</label>
-            <select class="form-control form-control-lg form-control-a" id="price">
-              <option>Unlimite</option>
-              <option>$50,000</option>
-              <option>$100,000</option>
-              <option>$150,000</option>
-              <option>$200,000</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <button type="submit" class="btn btn-b">Search Property</button>
+          <label class="fieldlabels">Email Tenant: *</label>
+          <input type="email" id="email1" name="email1" placeholder="Email Tenant" oninput="validateEmail()"/>
+          <p id="emailError" style="color: red"></p>
+
+          <label class="fieldlabels">Email Owner: *</label>
+          <input type="email" id="email2" name="email2" placeholder="Email Owner" />
+
+          <label class="fieldlabels">Number: *</label>
+          <input type="number" id="number" name="number" placeholder="ID" />
+
+          <label class="fieldlabels">Rent Date: *</label> <input type="month" name="rentDate" id="rentDate" onchange="checkMonth()" placeholder="RentDate"   />
+
+
+          <label class="fieldlabels">For How Many Month: *</label>
+          <input type="number" name="no_Month" id="no_Month" placeholder="End Date" />
+          </br>
+
+          <!-- Submit button placed right here -->
+          <input type="button" name="next" class="next action-button" value="Submit" style="margin-top: 10px; border-radius: 20px; background-color: #22b3c1; color: whitesmoke; border: #22b3c1; padding: 15px; height: 60px; width: 100px" />
         </div>
       </div>
     </form>
@@ -314,7 +255,10 @@ section class="intro-single">
       </div>
 
       <div>
-        <button type="button" style="margin: 7rem;margin-left:30rem; padding: 1rem;border-radius: 10px;padding-left:2rem;padding-right: 2rem; background-color: #22b3c1; font-size: larger "><b>RENT</b></button>
+        <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
+                data-target="#navbarTogglerDemo01" aria-expanded="false" style="margin: 7rem;margin-left:30rem; padding: 1rem;border-radius: 10px;padding-left:2rem;padding-right: 2rem; background-color: #22b3c1; font-size: larger ">
+          Rent
+        </button>
       </div>
     </div>
   </div>
@@ -396,9 +340,88 @@ section class="intro-single">
 
 <!-- Template Main Javascript File -->
 <script src="../Houses/js/main.js"></script>
+<script>
+  function checkMonth() {
+    // Get the value from the input fields
+    var rentDate = document.getElementById("rentDate").value;
+    var number = document.getElementById("number").value;
+
+    // Check if the "number" field is empty
+    if (!number) {
+      alert("Please enter a number.");
+      return; // Exit the function
+    }
+
+    // Extract the year and month from the input field value
+    var year = rentDate.slice(0, 4);
+    var month = rentDate.slice(5, 7);
+    var rentDateString = `${year}-${month.padStart(2, '0')}`;
+
+    var checkEmailData = {
+      // Data to be sent
+      number: number
+    };
+    // AJAX request: Check if the rent date is available for the specified "number"
+    $.ajax({
+      data: checkEmailData,
+      url: "http://localhost:9090/rent/dates",
+      type: "GET",
+      success: function (dates) {
+        // Check if the rent date exists for the specified number
+        if (dates.includes(rentDateString)) {
+          alert("This month is already taken for the specified number. Please choose a different month.");
+          // Reset the value of the input field
+          document.getElementById("rentDate").value = "";
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+</script>
 
 
 
+<script>
+
+  $(document).ready(function(){
+    $(".action-button").click(function(){
+      if($(this).val() === "Submit") {
+        var email1 = $("input[name='email1']").val();
+        var email2 = $("input[name='email2']").val();
+        var no = $("input[name='number']").val();
+        var Date = $("input[name='rentDate']").val();
+        var month = $("input[name='no_Month']").val();
+
+
+        var formData = {
+          email: email1,
+          ownerEmail: email2,
+          date: Date,
+          number:no,
+          noMonth:month,
+
+        };
+
+        $.ajax({
+          url: 'http://localhost:9090/rent/saveRent',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(formData),
+
+          success: function (data) {
+            alert("Form submitted successfully.")
+            console.log('Form submitted successfully. Returned data: ', data);
+          },
+          error: function (request, status, error) {
+            console.error();
+          }
+        });
+      }
+    });
+  });
+</script>
 <script>
 
 
@@ -501,6 +524,6 @@ section class="intro-single">
   });
 </script>
 
-
+->
 </body>
 </html>

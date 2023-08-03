@@ -83,7 +83,7 @@
                   <h2 class="steps">Step 1 - 4</h2>
                 </div>
 
-              </div> <label class="fieldlabels">Email: *</label> <input type="email" id="email" name="email" placeholder="Email Id" oninput="validateEmail()"/> <p id="emailError" style="color: red"></p> <label class="fieldlabels">Password: *</label> <input type="password" id="pwd" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" id="confirmPwd" name="confirmPwd" placeholder="Confirm Password" />
+              </div> <label class="fieldlabels">Email: *</label> <input type="email" id="email" name="email" placeholder="Email Id" oninput="validateEmail()" required/> <p id="emailError" style="color: red"></p> <label class="fieldlabels">Password: *</label> <input type="password" id="pwd" name="pwd" placeholder="Password" required/> <label class="fieldlabels">Confirm Password: *</label> <input type="password" id="confirmPwd" name="confirmPwd" placeholder="Confirm Password" required/>
 
 
               <script>
@@ -95,12 +95,16 @@
                   if (re.test(email)) {
                     errorElement.textContent = 'Valid email address';
                     errorElement.style.color = 'green';
+                    return true;
                   } else {
                     errorElement.textContent = 'Invalid email address';
                     errorElement.style.color = 'red';
+                    return false;
                   }
                 }
               </script>
+
+              
               <span id="message" ></span>
               <script>
                 document.getElementById('confirmPwd').addEventListener('input', function () {
@@ -118,7 +122,47 @@
                 });
               </script>
 
-            </div> <input type="button" name="next" class="next action-button" value="Next" />
+            </div>   <input type="button" name="next" class="next action-button" value="Next" id="nextButton5" disabled />
+            <script>
+              var nextButtonTimeout; // Variable to store the timeout ID
+
+              // Function to check if all required fields are valid
+              function validateForm() {
+                // Clear the previous timeout, if any
+                clearTimeout(nextButtonTimeout);
+
+                var email = document.getElementById("email");
+                var pwd = document.getElementById("pwd");
+                var confirmPwd = document.getElementById("confirmPwd");
+
+                // Check if both password fields are equal
+                var passwordsMatch = pwd.value === confirmPwd.value;
+                var validemail=validateEmail();
+                // Check if all required fields have valid values
+                var allFieldsValid =
+                        validemail &&
+                        pwd.reportValidity() &&
+                        confirmPwd.reportValidity() &&
+                        passwordsMatch;
+
+                // Enable/disable the "Next" button based on the form's validation status after a small delay
+                nextButtonTimeout = setTimeout(function () {
+                  var nextButton = document.getElementById("nextButton5");
+                  nextButton.disabled = !allFieldsValid;
+                }, 200); // Set a 200ms delay (adjust as needed)
+              }
+
+              // Call the validateForm function whenever any input field loses focus
+              document.getElementById("email").addEventListener("blur", validateForm);
+              document.getElementById("pwd").addEventListener("blur", validateForm);
+              document.getElementById("confirmPwd").addEventListener("blur", validateForm);
+
+              // Call the validateForm function whenever any password field value changes
+
+            </script>
+
+
+
 
           </fieldset>
 
@@ -131,9 +175,44 @@
                 <div class="col-5">
                   <h2 class="steps">Step 2 - 4</h2>
                 </div>
-              </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+              </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" id="fname"placeholder="First Name" required /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" id="lname" placeholder="Last Name" required /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" id="phone" placeholder="Contact No." required/> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" id="phone2" placeholder="Alternate Contact No." required/>
 
-            </div> <input type="button" name="next" class="next action-button" value="Next" style="margin-top: 10px" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            </div> <input type="button" name="next" class="next action-button" value="Next" id="nextButton2" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            <script>
+              var nextButtonTimeout; // Variable to store the timeout ID
+
+              // Function to check if all required fields are valid
+              function validateForm() {
+                // Clear the previous timeout, if any
+                clearTimeout(nextButtonTimeout);
+
+                var fn = document.getElementById("fname");
+                var ln = document.getElementById("lname");
+                var phone2 = document.getElementById("phone2");
+                var phone = document.getElementById("phone");
+
+                // Check if all required fields have valid values
+                var allFieldsValid =
+                        fn.reportValidity() &&
+                        ln.reportValidity() &&
+                        phone2.reportValidity() &&
+                        phone.reportValidity();
+
+                // Enable/disable the "Next" button based on the form's validation status after a small delay
+                nextButtonTimeout = setTimeout(function () {
+                  var nextButton = document.getElementById("nextButton2");
+                  nextButton.disabled = !allFieldsValid;
+                }, 200); // Set a 200ms delay (adjust as needed)
+              }
+
+              // Call the validateForm function whenever any input field loses focus
+              document.getElementById("fname").addEventListener("blur", validateForm);
+              document.getElementById("lname").addEventListener("blur", validateForm);
+              document.getElementById("phone2").addEventListener("blur", validateForm);
+              document.getElementById("phone").addEventListener("blur", validateForm);
+            </script>
+
+
           </fieldset>
 
           <fieldset>
@@ -146,7 +225,7 @@
                   <h2 class="steps">Step 3 - 4</h2>
                 </div>
 
-              <label class="fieldlabels">University Major:*</label> <input type="text" name="major" placeholder="University Major" />
+              <label class="fieldlabels">University Major:*</label> <input type="text" name="major" id="Major" placeholder="University Major" required />
               <label class="fieldlabels">Work Place:*</label>
               <select id="workplace" name="workplace" class="form-control" style="background-color: #ECEFF1;" >
 
@@ -154,26 +233,36 @@
                 <option value="Employee">Employee</option>
               </select>
 
-              <label class="fieldlabels">Age:*</label> <input type="number" name="age" id="age"  placeholder="Enter Your Age:" pattern="\d{1,2}" maxlength="2" oninput="validateAge()" >
+                <label class="fieldlabels">Age:*</label>
+                <input
+                        type="number"
+                        name="age"
+                        id="age"
+                        placeholder="Enter Your Age:"
+                        pattern="\d{1,2}"
+                        maxlength="2"
+                        oninput="validateAge()"
+                        oninvalid="this.setCustomValidity('Age must be between 1 and 100.')"
+                        required
+                />
                 <span id="ageMessage"></span>
 
                 <script>
-                  var ageInput = document.getElementById('age');
-                  var tenantInput = document.getElementById('Type');
+                  function validateAge() {
+                    var ageInput = document.getElementById("age");
+                    var age = parseInt(ageInput.value);
 
-                  ageInput.addEventListener('input', function(e) {
-                    if (ageInput.value.length > 2) {
-                      // If more than two numbers, remove the last character
-                      ageInput.value = ageInput.value.slice(0, 2);
-                    } else if (ageInput.value.length == 2) {
-                      // If exactly two numbers, move focus to the next field
-                      tenantInput.focus();
+                    if (age >= 1 && age <= 100) {
+                      ageInput.setCustomValidity(""); // Clear any previous custom validity message
+                    } else {
+                      ageInput.setCustomValidity("Age must be between 1 and 100.");
                     }
-                  });
+                  }
                 </script>
 
 
-              <label class="fieldlabels">Type:*</label>
+
+                <label class="fieldlabels">Type:*</label>
               <select id="Type" name="Type" class="form-control "  style="background-color: #ECEFF1;">
                 <option value="tenant">Tenant</option>
                 <option value="owner">Owner</option>
@@ -189,7 +278,36 @@
                     console.log(UserType); //for testing purposes
                   });
                 </script>
-            </div> <input type="button" name="next" class="next action-button" value="Submit" style="margin-top: 10px" /> <input type="button" id="previous2" name="previous" class= " action-button-previous" value="Previous" />
+            </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton" disabled /><input type="button" id="previous2" name="previous" class= " action-button-previous" value="Previous" />
+              <script>
+                var nextButtonTimeout; // Variable to store the timeout ID
+
+                // Function to check if all required fields are valid
+                function validateForm() {
+                  // Clear the previous timeout, if any
+                  clearTimeout(nextButtonTimeout);
+
+                  var major = document.getElementById("Major");
+                  var age = document.getElementById("age");
+
+
+                  // Check if all required fields have valid values
+                  var allFieldsValid =
+                          major.reportValidity() &&
+
+                          age.reportValidity();
+
+                  // Enable/disable the "Next" button based on the form's validation status after a small delay
+                  nextButtonTimeout = setTimeout(function () {
+                    var nextButton = document.getElementById("nextButton");
+                    nextButton.disabled = !allFieldsValid;
+                  }, 200); // Set a 200ms delay (adjust as needed)
+                }
+
+                // Call the validateForm function whenever any input field loses focus
+                document.getElementById("Major").addEventListener("blur", validateForm);
+                document.getElementById("age").addEventListener("blur", validateForm);
+              </script>
               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
               <script>
                 $('#previous2').click(function() {
@@ -200,7 +318,7 @@
             </div>
           </fieldset>
           <fieldset>
-            <div class="form-card">
+            <div class="form-card" >
               <div class="row">
                 <div class="col-7">
                   <h2 class="fs-title">Finish:</h2>
@@ -211,11 +329,11 @@
               </div> <br><br>
               <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
               <div class="row justify-content-center">
-                <div class="col-3"> <img src="https://t4.ftcdn.net/jpg/02/72/79/67/360_F_272796737_1gfclSQF8yzFHZeE2XX5513eOQMV53dw.jpg" class="fit-image"> </div>
+                <div class="col-3"> <img src="truesign.jpg" class="fit-image"> </div>
               </div> <br><br>
               <div class="row justify-content-center">
                 <div class="col-7 text-center">
-                  <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                  <h5 class="purple-text text-center" style="font-size: 1000px">You Have Successfully Signed Up</h5>
                 </div>
               </div>
             </div>
@@ -225,7 +343,7 @@
     </div>
   </div>
 </div>
-<footer class="footer-distributed">
+<footer class="footer-distributed" >
 
   <div class="footer-left">
 
@@ -285,6 +403,7 @@
   $(document).ready(function(){
     $(".action-button").click(function(){
       if($(this).val() === "Submit"){
+
         var email = $("input[name='email']").val();
         var pwd = $("input[name='pwd']").val();
         var cpwd = $("input[name='cpwd']").val();
@@ -335,6 +454,7 @@
 
             if(responseData===true){
               console.log("email exists")
+
             }
             else{
               console.log("success email")
