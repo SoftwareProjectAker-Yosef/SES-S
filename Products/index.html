@@ -89,7 +89,7 @@
 
                <div class="row clearfix">
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('table')">
+                     <a href="productpage.html" onclick="setCookie('type','Table',1)">
                         <div class="box-img">
                            <h4>Table</h4>
                            <div class="imgimg">
@@ -99,7 +99,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('closet')">
+                     <a href="productpage.html" onclick="setCookie('type','Closet',1)">
                         <div class="box-img">
                            <h4>Closet</h4>
                            <div class="imgimg2">
@@ -109,7 +109,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('bed')">
+                     <a href="productpage.html" onclick="setCookie('type','Bed',1)">
                         <div class="box-img">
                            <h4>Bed</h4>
                            <img src="images/product/5.png" alt="">
@@ -117,7 +117,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('chair')">
+                     <a href="productpage.html" onclick="setCookie('type','Chair',1)">
                         <div class="box-img">
                            <h4>Chair</h4>
                            <img src="images/product/2.png" alt="">
@@ -125,7 +125,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('sofa')">
+                     <a href="productpage.html" onclick="setCookie('type','Sofa',1)">
                         <div class="box-img">
                            <h4>Sofa</h4>
                            <img src="images/product/12.png" alt="">
@@ -133,7 +133,7 @@
                      </a>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="productpage.html" onclick="setCookie('others')">
+                     <a href="productpage.html" onclick="setCookie('type','Others',1)">
                         <div class="box-img">
                            <h4>Others</h4>
                            <div class="imgimg3">
@@ -164,11 +164,16 @@
       <!--custom js-->
       <script src="js/custom.js"></script>
    <script>
-      function setCookie(item) {
-         alert(item);
-         document.cookie = "selectedItem=" + item + "; path=/";
-
+      function setCookie(name, value, days) {
+         var expires = "";
+         if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+         }
+         document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
       }
+   </script>
    </script>
    </body>
 </html>
