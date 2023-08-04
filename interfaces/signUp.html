@@ -122,7 +122,7 @@
                 });
               </script>
 
-            </div>   <input type="button" name="next" class="next action-button" value="Next" id="nextButton5" disabled />
+            </div>   <input type="button" name="next" class="next action-button" value="Next" id="nextButton5"  disabled  >
             <script>
               var nextButtonTimeout; // Variable to store the timeout ID
 
@@ -177,7 +177,7 @@
                 </div>
               </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" id="fname"placeholder="First Name" required /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" id="lname" placeholder="Last Name" required /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" id="phone" placeholder="Contact No." required/> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" id="phone2" placeholder="Alternate Contact No." required/>
 
-            </div> <input type="button" name="next" class="next action-button" value="Next" id="nextButton2" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            </div> <input type="button" name="next" class="next action-button" value="Next" id="nextButton2" style="margin-top: 10px" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
             <script>
               var nextButtonTimeout; // Variable to store the timeout ID
 
@@ -195,8 +195,9 @@
                 var allFieldsValid =
                         fn.reportValidity() &&
                         ln.reportValidity() &&
-                        phone2.reportValidity() &&
-                        phone.reportValidity();
+                        phone.reportValidity()&&
+                        phone2.reportValidity();
+
 
                 // Enable/disable the "Next" button based on the form's validation status after a small delay
                 nextButtonTimeout = setTimeout(function () {
@@ -208,8 +209,9 @@
               // Call the validateForm function whenever any input field loses focus
               document.getElementById("fname").addEventListener("blur", validateForm);
               document.getElementById("lname").addEventListener("blur", validateForm);
-              document.getElementById("phone2").addEventListener("blur", validateForm);
               document.getElementById("phone").addEventListener("blur", validateForm);
+              document.getElementById("phone2").addEventListener("blur", validateForm);
+
             </script>
 
 
@@ -278,7 +280,7 @@
                     console.log(UserType); //for testing purposes
                   });
                 </script>
-            </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton" disabled /><input type="button" id="previous2" name="previous" class= " action-button-previous" value="Previous" />
+            </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton" style="margin-top: 10px" disabled /><input type="button" id="previous2" name="previous" class= " action-button-previous" value="Previous" />
               <script>
                 var nextButtonTimeout; // Variable to store the timeout ID
 
@@ -454,6 +456,9 @@
 
             if(responseData===true){
               console.log("email exists")
+              alert("Email Is Existed, Please Try Another Email");
+              window.location.href = 'signUp.html'; // Redirecting to signup.html
+
 
             }
             else{
