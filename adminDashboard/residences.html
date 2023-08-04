@@ -111,12 +111,7 @@
             <i class="icon-menu menu-icon"></i>
           </a>
         </li>
-        <li class="nav-item">
-          <form class="search-bar">
-            <input type="text" class="form-control" placeholder="Enter keywords">
-            <a href=""><i class="icon-magnifier"></i></a>
-          </form>
-        </li>
+
       </ul>
 
 
@@ -160,33 +155,25 @@
         </div>
       </div><!--End Row-->
 
-      <div class="row">
-        <div class="col-12 col-lg-12">
-          <div class="card">
-            <div class="card-header"> Unaccepted residences
-              <div class="card-action">
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table id="data-table" class="table align-items-center table-flush table-borderless">
-                <thead>
-                <tr>
-                  <th>ID number</th>
-                  <th>Owner email</th>
-                  <th>Phone number</th>
-                  <th>Area</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody id="table-body">
-                <!-- Rows will be dynamically generated here -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div><!--End Row-->
+      <div class="table-responsive">
+        <table id="data-table" class="table align-items-center table-flush table-borderless">
+          <thead>
+          <tr>
+            <th>ID number</th>
+            <th>Owner email</th>
+            <th>Phone number</th>
+            <th>Area</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody id="table-body">
+          <!-- Rows will be dynamically generated here -->
+          </tbody>
+        </table>
+      </div>
+
+
 
       <!--End Dashboard Content-->
 
@@ -272,13 +259,13 @@
 <!-- Index js -->
 <script src="assets/js/index.js"></script>
 
+
 <script>
-  // JavaScript function to generate a table row
-  function generateRow(data) {
+  function generateRow(residence) {
     const row = document.createElement("tr");
 
-    // Create table cells and populate with data from the array
-    data.forEach(item => {
+    // Create table cells and populate with data from the residence object
+    Object.values(residence).forEach(item => {
       const cell = document.createElement("td");
       cell.textContent = item;
       row.appendChild(cell);
@@ -286,19 +273,31 @@
 
     // Create the "Delete", "Add", and "View" buttons
     const actionsCell = document.createElement("td");
+
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("btn", "btn-danger");
+    deleteButton.addEventListener("click", function () {
+      performAction(2, residence.id); // Set variable to 2 (Delete) and send request
+      deleteRow(row); // Remove the row from the table
+    });
     actionsCell.appendChild(deleteButton);
 
     const addButton = document.createElement("button");
     addButton.textContent = "Add";
     addButton.classList.add("btn", "btn-success");
+    addButton.addEventListener("click", function () {
+      performAction(1, residence.id);
+      deleteRow(row); // Set variable to 1 (Add) and send request
+    });
     actionsCell.appendChild(addButton);
 
     const viewButton = document.createElement("button");
     viewButton.textContent = "View";
     viewButton.classList.add("btn", "btn-info");
+    viewButton.addEventListener("click", function () {
+      performAction(0, residence.id); // Set variable to 0 (View) and send request
+    });
     actionsCell.appendChild(viewButton);
 
     row.appendChild(actionsCell);
@@ -306,36 +305,80 @@
     return row;
   }
 
+  function deleteRow(row) {
+    // Remove the given row from the table
+    if (row && row.parentNode) {
+      row.parentNode.removeChild(row);
+    }
+  }
+
+  function performAction(actionType, residenceId) {
+    // Here you can send a request to the desired endpoint with the residenceId and the actionType as parameters.
+    // You can use the JavaScript Fetch API or other methods to make the HTTP request.
+    // For demonstration purposes, we will just log the action and residence ID to the console.
+if(actionType==0){
+  localStorage.setItem("propertyID",residenceId);
+  window.location.href="viewPropertyAdmin.html";
+}
+else {
+  console.log("Action Type:", actionType);
+  console.log("Residence ID:", residenceId);
+
+  // Replace with the actual ID of the Residence you want to update
+  const adminApprovalValue = actionType; // Replace with the new adminApproval value you want to set
+
+  const url = `http://localhost:9090/residence/admin-approval`;
+  const data = {
+    id: residenceId,
+    adminApproval: adminApprovalValue
+  };
+
+  $.ajax({
+    url: url,
+    type: "PUT",
+    data: data,
+    success: function (response) {
+      console.log("suucessful");
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+  }
+
   // Sample data for generating a row
-  const rowData = ['#9405822', 'owner@example.com', '123-456-7890', 'Sample Area 1', '$ 1250.00'];
+  const residenceData = {
+    id: '#9405822',
+    ownerEmail: 'owner@example.com',
+    phoneNumber: '123-456-7890',
+    area: 'Sample Area 1',
+    price: '$ 1250.00'
+  };
 
   // Function call to generate the row and add it to the table
-  const tableBody = document.getElementById("table-body");
-  const newRow = generateRow(rowData);
-  tableBody.appendChild(newRow);
-
-
 
   $.ajax({
     url: "http://localhost:9090/residence/getAllUnAccepted",
     type: "GET",
     success: function (response) {
-
       for (let i = 0; i < response.length; i++) {
-
-        const rowData = [response[i].id, response[i].ownerEmail, response[i].phoneNumber, response[i].area+' m2', response[i].price];
+        const residenceData = {
+          id: response[i].id,
+          ownerEmail: response[i].ownerEmail,
+          phoneNumber: response[i].phoneNumber,
+          area: response[i].area + ' m2',
+          price: response[i].price
+        };
         const tableBody = document.getElementById("table-body");
-        const newRow = generateRow(rowData);
+        const newRow = generateRow(residenceData);
         tableBody.appendChild(newRow);
-
       }
     },
-
     error: function (error) {
       console.log(error);
     }
   });
-
 </script>
 </body>
 </html>
