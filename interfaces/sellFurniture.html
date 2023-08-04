@@ -40,10 +40,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="buyFurniture.html" style="margin-left: 10px; margin-right: 10px;color: #FFFFFF;font-size: larger">Furniture</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Payments.html" style="margin-left: 10px; margin-right: 10px;color: #FFFFFF;font-size: larger">Payments</a>
 
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="margin-left: 10px; margin-right: 10px; ">Log Out</a>
@@ -100,9 +97,50 @@
                                 <div class="col-5">
                                     <h2 class="steps">Step 2 - 4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phone" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" id="fname" required/> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" id="lname" required /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phone" placeholder="Contact No." id="phone"  required/> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" id="phone2" placeholder="Alternate Contact No." required />
 
-                        </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        </div> <input type="button" name="next" class="next action-button" value="Next" id="nextButton5" style="margin-top: 10px" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <script>
+                            var nextButtonTimeout; // Variable to store the timeout ID
+
+                            // Function to check if all required fields are valid
+                            function validateForm() {
+                                // Clear the previous timeout, if any
+                                clearTimeout(nextButtonTimeout);
+
+                                var fn = document.getElementById("fname");
+                                var ln = document.getElementById("lname");
+                                var phone = document.getElementById("phone");
+                                var phone2 = document.getElementById("phone2");
+
+                                // Check if both password fields are equal
+
+                                // Check if all required fields have valid values
+                                var allFieldsValid =
+                                    fn.reportValidity() &&
+                                    ln.reportValidity() &&
+                                    phone.reportValidity()&&
+
+                                    phone2.reportValidity();
+
+                                // Enable/disable the "Next" button based on the form's validation status after a small delay
+                                nextButtonTimeout = setTimeout(function () {
+                                    var nextButton = document.getElementById("nextButton5");
+                                    nextButton.disabled = !allFieldsValid;
+                                }, 200); // Set a 200ms delay (adjust as needed)
+                            }
+
+                            // Call the validateForm function whenever any input field loses focus
+                            document.getElementById("fname").addEventListener("blur", validateForm);
+                            document.getElementById("lname").addEventListener("blur", validateForm);
+                            document.getElementById("phone").addEventListener("blur", validateForm);
+                            document.getElementById("phone2").addEventListener("blur", validateForm);
+
+
+                            // Call the validateForm function whenever any password field value changes
+
+                        </script>
+
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
@@ -113,9 +151,9 @@
                                 <div class="col-5">
                                     <h2 class="steps">Step 3 - 4</h2>
                                 </div>
-                            </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*">
+                            </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*" id="img" required>
                             <label class="fieldlabels">Furniture Type:*</label>
-                            <select id="furnituretype" name="furnituretype" class="form-control" style="background-color: #ECEFF1;" >
+                            <select id="furnituretype" name="furnituretype" class="form-control" style="background-color: #ECEFF1;" id="type" required>
                                 <option value="None">Choose Type</option>
                                 <option value="Chair">Chair</option>
                                 <option value="Table">Table</option>
@@ -124,14 +162,59 @@
                                 <option value="Sofa">Sofa</option>
                                 <option value="Others">Others</option>
                             </select>
-                            <label class="fieldlabels">Number of Item:</label> <input type="number" name="number" placeholder="How Many Items" >
-                            <label class="fieldlabels">Price In Dollar:</label> <input type="number" name="price" placeholder="Price In U.S Dollar" >
+                            <label class="fieldlabels">Number of Item:</label> <input type="number" name="number" placeholder="How Many Items" id="number" required>
+                            <label class="fieldlabels">Price In Dollar:</label> <input type="number" name="price" placeholder="Price In U.S Dollar" id="price" required>
 
                             <label class="fieldlabels">Description:</label>
-                            <input type="text" name="description" placeholder="Enter a slight description of your residence" />
+                            <input type="text" name="description" placeholder="Enter a slight description of your residence" id="disc" required/>
 
-                        </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton4" style="margin-top: 10px" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
+
+                    <script>
+                        var nextButtonTimeout; // Variable to store the timeout ID
+
+                        // Function to check if all required fields are valid
+                        function validateForm() {
+                            // Clear the previous timeout, if any
+                            clearTimeout(nextButtonTimeout);
+
+                            var img = document.getElementById("img");
+                            var type = document.getElementById("type");
+                            var number = document.getElementById("number");
+                            var price = document.getElementById("price");
+                            var disc = document.getElementById("disc");
+
+                            // Check if both password fields are equal
+
+                            // Check if all required fields have valid values
+                            var allFieldsValid =
+                                img.reportValidity() &&
+                                type.reportValidity() &&
+                                number.reportValidity()&&
+                                price.reportValidity()&&
+                                disc.reportValidity();
+
+                            // Enable/disable the "Next" button based on the form's validation status after a small delay
+                            nextButtonTimeout = setTimeout(function () {
+                                var nextButton = document.getElementById("nextButton4");
+                                nextButton.disabled = !allFieldsValid;
+                            }, 200); // Set a 200ms delay (adjust as needed)
+                        }
+
+                        // Call the validateForm function whenever any input field loses focus
+                        document.getElementById("img").addEventListener("blur", validateForm);
+                        document.getElementById("type").addEventListener("blur", validateForm);
+                        document.getElementById("number").addEventListener("blur", validateForm);
+                        document.getElementById("price").addEventListener("blur", validateForm);
+                        document.getElementById("disc").addEventListener("blur", validateForm);
+
+
+                        // Call the validateForm function whenever any password field value changes
+
+                    </script>
+
+
                     <fieldset>
                         <div class="form-card">
                             <div class="row">

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Multi-step form</title>
+  <title>Sakancom</title>
+  <link href="../resources/public_html/assets/img/loyintlogos/logow.svg" rel="icon">
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
   <link rel="stylesheet" href="../multi-step-form/dist/style.css">
@@ -44,10 +45,6 @@
 
       </ul>
     </div>
-    <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
-            data-target="#navbarTogglerDemo01" aria-expanded="false">
-      <span class="fa fa-search" aria-hidden="true"></span>
-    </button>
   </div>
 </nav>
 
@@ -99,21 +96,21 @@
 
 <div style="display: inline-block">
               <label class="fieldlabels">Country: *</label>
-              <input type="text" name="country" placeholder="" />
+              <input type="text" name="country" placeholder="" id="country" required />
 
               <label class="fieldlabels">City: *</label>
-              <input type="text" name="city" placeholder="" />
+              <input type="text" name="city" placeholder="" id="city" required>
               <label class="fieldlabels">Location: *</label>
-              <input type="text" name="location" placeholder="Address, Street, etc..." />
+              <input type="text" name="location" placeholder="Address, Street, etc..." id="location" required />
 
 
 </div>
 
               <label class="fieldlabels">Floor number: *</label>
-              <input type="number" name="floor#" placeholder="How many floors does the residence have?" />
+              <input type="number" name="floor#" placeholder="How many floors does the residence have?" id="floor" required />
 
               <label class="fieldlabels">Area:</label>
-              <input type="number" name="area" placeholder="Enter the total area of your residence in square meter" />
+              <input type="number" name="area" placeholder="Enter the total area of your residence in square meter" id="area" required />
 
 
               <label class="fieldlabels">Bedrooms: *</label>
@@ -127,12 +124,57 @@
 
 
               <label class="fieldlabels">Description:</label>
-              <input type="text" name="description" placeholder="Enter a slight description of your residence" />
+              <input type="text" name="description" placeholder="Enter a slight description of your residence" id="disc"  required/>
 
 
             </div>
-            <input type="button" name="next" class="next action-button" value="Next" />
+            <input type="button" name="next" class="next action-button" value="Next" id="nextButton5" style="margin-top: 10px" disabled  />
             <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+
+            <script>
+              var nextButtonTimeout; // Variable to store the timeout ID
+
+              // Function to check if all required fields are valid
+              function validateForm() {
+                // Clear the previous timeout, if any
+                clearTimeout(nextButtonTimeout);
+
+                var country = document.getElementById("country");
+                var city = document.getElementById("city");
+                var location = document.getElementById("location");
+                var floor = document.getElementById("floor");
+                var area = document.getElementById("area");
+                var disc = document.getElementById("disc");
+                // Check if both password fields are equal
+
+                // Check if all required fields have valid values
+                var allFieldsValid =
+                        country.reportValidity() &&
+                        city.reportValidity() &&
+                        location.reportValidity()&&
+                        floor.reportValidity()&&
+                        area.reportValidity()&&
+                        disc.reportValidity();
+
+                // Enable/disable the "Next" button based on the form's validation status after a small delay
+                nextButtonTimeout = setTimeout(function () {
+                  var nextButton = document.getElementById("nextButton5");
+                  nextButton.disabled = !allFieldsValid;
+                }, 200); // Set a 200ms delay (adjust as needed)
+              }
+
+              // Call the validateForm function whenever any input field loses focus
+              document.getElementById("country").addEventListener("blur", validateForm);
+              document.getElementById("city").addEventListener("blur", validateForm);
+              document.getElementById("location").addEventListener("blur", validateForm);
+              document.getElementById("floor").addEventListener("blur", validateForm);
+              document.getElementById("area").addEventListener("blur", validateForm);
+              document.getElementById("disc").addEventListener("blur", validateForm);
+
+              // Call the validateForm function whenever any password field value changes
+
+            </script>
+
           </fieldset>
 
           <fieldset>
@@ -146,10 +188,10 @@
                 </div>
               </div>
               <label class="fieldlabels">Upload Your Photo:</label>
-              <input type="file" name="pic" accept="image/*" multiple>
+              <input type="file" name="pic" accept="image/*" id="img" multiple required>
 
               <label class="fieldlabels">Price:</label>
-              <input type="number" name="price" placeholder="Please note that the price is in USD (United States Dollar)" />
+              <input type="number" name="price" placeholder="Please note that the price is in USD (United States Dollar)" id="price"  required/>
 
 
               <div id="services-container">
@@ -158,8 +200,44 @@
                 <button type="button" id="add-service-btn">Add</button>
               </div>
             </div>
-            <input type="button" name="next" class="next action-button" id="submitButton" value="Submit" />
+            <input type="button" name="next" class="next action-button" id="submitButton" value="Submit" style="margin-top: 10px" />
             <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+
+            <script>
+              var nextButtonTimeout; // Variable to store the timeout ID
+
+              // Function to check if all required fields are valid
+              function validateForm() {
+                // Clear the previous timeout, if any
+                clearTimeout(nextButtonTimeout);
+
+                var img = document.getElementById("img");
+                var id = document.getElementById("price");
+
+                // Check if both password fields are equal
+
+                // Check if all required fields have valid values
+                var allFieldsValid =
+                        img.reportValidity() &&
+
+                        id.reportValidity();
+
+                // Enable/disable the "Next" button based on the form's validation status after a small delay
+                nextButtonTimeout = setTimeout(function () {
+                  var nextButton = document.getElementById("submitButton");
+                  nextButton.disabled = !allFieldsValid;
+                }, 200); // Set a 200ms delay (adjust as needed)
+              }
+
+              // Call the validateForm function whenever any input field loses focus
+              document.getElementById("img").addEventListener("blur", validateForm);
+              document.getElementById("id").addEventListener("blur", validateForm);
+
+
+              // Call the validateForm function whenever any password field value changes
+
+            </script>
+
           </fieldset>
 
           <fieldset>
@@ -195,7 +273,57 @@
 </div>
 
 <footer class="footer-distributed">
-  <!-- Footer content -->
+
+  <div class="footer-left">
+
+    <a  class="logo">
+      <img src="Screenshot_2023-07-02_at_13.13.32-removebg.png" alt="" style="width: 250px;  ">
+    </a>
+
+
+
+    <p class="footer-company-name" style="color: #FFFFFF;padding-top: 3rem ">Sakancom © 2015</p>
+  </div>
+
+  <div class="footer-center">
+
+    <div>
+      <i class="fa fa-map-marker"></i>
+      <p><span>Rafedyia Street</span> Nablus, Palestine</p>
+    </div>
+
+    <div>
+      <i class="fa fa-phone"></i>
+      <p>+972595254709</p> </br>
+      <p style="padding-left: 4.5rem">+970598666558</p>
+    </div>
+
+    <div>
+      <i class="fa fa-envelope"></i>
+      <p><a href="mailto:yossalam261@gmail.com">yossalam261@gmail.com</a></p></br>
+      <p style="padding-left: 4.5rem"><a href="mailto:mohammadaker7@gmail.com">mohammadaker7@gmail.com</a></p>
+    </div>
+
+  </div>
+
+  <div class="footer-right">
+
+    <p class="footer-company-about">
+      <span>About the company</span>
+      Sakancom offers a diverse range of rental properties to suit every budget. With a commitment to service and transparency, we make finding your perfect home easy and enjoyable
+    </p>
+
+    <div class="footer-icons">
+
+      <a href="https://www.facebook.com/yusuf.salam.568/"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/YoSSalam2"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/yossalam8/"><i class="fa fa-linkedin"></i></a>
+      <a href="https://github.com/YoSSalam8"><i class="fa fa-github"></i></a>
+
+    </div>
+
+  </div>
+
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
