@@ -153,7 +153,7 @@
                                 </div>
                             </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*" id="img" required>
                             <label class="fieldlabels">Furniture Type:*</label>
-                            <select id="furnituretype" name="furnituretype" class="form-control" style="background-color: #ECEFF1;" id="type" required>
+                            <select name="furnituretype" class="form-control" style="background-color: #ECEFF1;" id="type" required>
                                 <option value="None">Choose Type</option>
                                 <option value="Chair">Chair</option>
                                 <option value="Table">Table</option>
@@ -168,8 +168,8 @@
                             <label class="fieldlabels">Description:</label>
                             <input type="text" name="description" placeholder="Enter a slight description of your residence" id="disc" required/>
 
-                        </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton4" style="margin-top: 10px" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    </fieldset>
+                        </div> <input type="button" name="next" class="next action-button" value="Submit" id="nextButton" style="margin-top: 10px" disabled /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+
 
                     <script>
                         var nextButtonTimeout; // Variable to store the timeout ID
@@ -197,7 +197,7 @@
 
                             // Enable/disable the "Next" button based on the form's validation status after a small delay
                             nextButtonTimeout = setTimeout(function () {
-                                var nextButton = document.getElementById("nextButton4");
+                                var nextButton = document.getElementById("nextButton");
                                 nextButton.disabled = !allFieldsValid;
                             }, 200); // Set a 200ms delay (adjust as needed)
                         }
@@ -213,7 +213,7 @@
                         // Call the validateForm function whenever any password field value changes
 
                     </script>
-
+                    </fieldset>
 
                     <fieldset>
                         <div class="form-card">
