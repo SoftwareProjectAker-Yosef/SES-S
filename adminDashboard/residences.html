@@ -154,8 +154,9 @@
           </div>
         </div>
       </div><!--End Row-->
-
+      <h5 class="card-title">Residences added</h5>
       <div class="table-responsive">
+
         <table id="data-table" class="table align-items-center table-flush table-borderless">
           <thead>
           <tr>
@@ -174,7 +175,26 @@
       </div>
 
 
-
+      <br>
+      <br>
+      <h5 class="card-title">Ads requests</h5>
+      <div class="table-responsive">
+        <table id="data-table2" class="table align-items-center table-flush table-borderless">
+          <thead>
+          <tr>
+            <!-- Define the new table header -->
+            <th>ID number</th>
+            <th>Owner email</th>
+            <th>Phone number</th>
+            <th>Area</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody id="table-body2">
+          <!-- Rows will be dynamically generated here -->
+          </tbody>
+        </table>
+      </div>
       <!--End Dashboard Content-->
 
       <!--start overlay-->
@@ -278,7 +298,7 @@
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("btn", "btn-danger");
     deleteButton.addEventListener("click", function () {
-      performAction(2, residence.id); // Set variable to 2 (Delete) and send request
+      performAction(2, residence.id,1); // Set variable to 2 (Delete) and send request
       deleteRow(row); // Remove the row from the table
     });
     actionsCell.appendChild(deleteButton);
@@ -287,7 +307,7 @@
     addButton.textContent = "Add";
     addButton.classList.add("btn", "btn-success");
     addButton.addEventListener("click", function () {
-      performAction(1, residence.id);
+      performAction(1, residence.id,1);
       deleteRow(row); // Set variable to 1 (Add) and send request
     });
     actionsCell.appendChild(addButton);
@@ -296,7 +316,7 @@
     viewButton.textContent = "View";
     viewButton.classList.add("btn", "btn-info");
     viewButton.addEventListener("click", function () {
-      performAction(0, residence.id); // Set variable to 0 (View) and send request
+      performAction(0, residence.id,1); // Set variable to 0 (View) and send request
     });
     actionsCell.appendChild(viewButton);
 
@@ -312,39 +332,144 @@
     }
   }
 
-  function performAction(actionType, residenceId) {
-    // Here you can send a request to the desired endpoint with the residenceId and the actionType as parameters.
-    // You can use the JavaScript Fetch API or other methods to make the HTTP request.
-    // For demonstration purposes, we will just log the action and residence ID to the console.
-if(actionType==0){
-  localStorage.setItem("propertyID",residenceId);
-  window.location.href="viewPropertyAdmin.html";
+
+
+
+  function generateRowForSecondTable(residence) {
+    const row = document.createElement("tr");
+
+    // Create table cells and populate with data from the residence object
+    Object.values(residence).forEach(item => {
+      const cell = document.createElement("td");
+      cell.textContent = item;
+      row.appendChild(cell);
+    });
+
+    // Create the "Delete" button for the second table
+    const actionsCell = document.createElement("td");
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("btn", "btn-danger");
+    deleteButton.addEventListener("click", function () {
+      performAction(2, residence.id, 2); // Set variable to 2 (Delete) and send request for the second table
+      deleteRow(row); // Remove the row from the table
+    });
+    actionsCell.appendChild(deleteButton);
+
+    // Create the "Add" button for the second table
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add";
+    addButton.classList.add("btn", "btn-success");
+    addButton.addEventListener("click", function () {
+      performAction(1, residence.id, 2); // Set variable to 1 (Add) and send request for the second table
+      deleteRow(row); // Remove the row from the table
+    });
+    actionsCell.appendChild(addButton);
+
+    // Create the "View" button (only for the second table)
+    const viewButton = document.createElement("button");
+    viewButton.textContent = "View";
+    viewButton.classList.add("btn", "btn-info");
+    viewButton.addEventListener("click", function () {
+      performAction(0, residence.id, 2); // Set variable to 0 (View) and send request for the second table
+    });
+    actionsCell.appendChild(viewButton);
+
+    row.appendChild(actionsCell);
+
+    return row;
+  }
+
+
+
+  function performAction(actionType, residenceId, tableIndex) {
+
+
+    console.log("Action Type:", actionType);
+    console.log("Residence ID:", residenceId);
+    console.log("table index:", tableIndex);
+
+
+
+    if(tableIndex===2){
+
+  if (actionType == 0) {
+    localStorage.setItem("propertyID", residenceId);
+    window.location.href = "viewPropertyAdmin.html";
+  }
+
+
+  else if (actionType===1){
+
+    $.ajax({
+      url: 'http://localhost:9090/residence/acceptAd',
+      type: "PUT",
+      data: {id:residenceId},
+      success: function (response) {
+        console.log("suucessful");
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  }
+
+
+  else if (actionType===2){
+
+
+    $.ajax({
+      url:'http://localhost:9090/residence/declineAd',
+      type: "PUT",
+      data: {id:residenceId},
+      success: function (response) {
+        console.log("suucessful");
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+
+  }
+
+
+
 }
-else {
-  console.log("Action Type:", actionType);
-  console.log("Residence ID:", residenceId);
 
-  // Replace with the actual ID of the Residence you want to update
-  const adminApprovalValue = actionType; // Replace with the new adminApproval value you want to set
 
-  const url = `http://localhost:9090/residence/admin-approval`;
-  const data = {
-    id: residenceId,
-    adminApproval: adminApprovalValue
-  };
+    else if (tableIndex === 1) {
+      console.log("asdadadadaddadadadadadd");
+      if (actionType === 0) {
+        localStorage.setItem("propertyID", residenceId);
+        window.location.href = "viewPropertyAdmin.html";
+      } else {
 
-  $.ajax({
-    url: url,
-    type: "PUT",
-    data: data,
-    success: function (response) {
-      console.log("suucessful");
-    },
-    error: function (error) {
-      console.log(error);
+
+        // Replace with the actual ID of the Residence you want to update
+        const adminApprovalValue = actionType; // Replace with the new adminApproval value you want to set
+
+        const url = `http://localhost:9090/residence/admin-approval`;
+        const data = {
+          id: residenceId,
+          adminApproval: adminApprovalValue
+        };
+
+        $.ajax({
+          url: url,
+          type: "PUT",
+          data: data,
+          success: function (response) {
+            console.log("suucessful");
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        });
+      }
     }
-  });
-}
   }
 
   // Sample data for generating a row
@@ -379,6 +504,34 @@ else {
       console.log(error);
     }
   });
+
+
+
+
+  $.ajax({
+    url: "http://localhost:9090/residence/getResidencesForAdsAdmin",
+    type: "GET",
+    success: function (response) {
+      for (let i = 0; i < response.length; i++) {
+        const residenceData = {
+          id: response[i].id,
+          ownerEmail: response[i].ownerEmail,
+          phoneNumber: response[i].phoneNumber,
+          area: response[i].area + ' m2',
+          price: response[i].price
+        };
+        const tableBody2 = document.getElementById("table-body2"); // Get the new table's body
+        const newRow = generateRowForSecondTable(residenceData); // Generate the row using the new data
+        tableBody2.appendChild(newRow); // Add the row to the new table
+      }
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+
+
+
 </script>
 </body>
 </html>
