@@ -23,11 +23,23 @@
 
 
 
+  <style>
+    /* Custom CSS to adjust the height of the first column cells */
+    .custom-table th,
+    .custom-table td {
+      vertical-align: middle;
+    }
 
+    /* Custom CSS for table container */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+  </style>
 
 
 </head>
-<body>
+<body style="padding-top: 9.1rem;">
 
 
 
@@ -99,19 +111,19 @@
         <table class="table custom-table">
           <thead>
           <tr>
-            <th scope="col">
-              <label class="control control--checkbox">
 
 
-              </label>
+
             </th>
             <th scope="col">Reservation ID</th>
             <th scope="col">Residence ID</th>
+            <th scope="col">Reservation Date</th>
             <th scope="col">Owner Email</th>
             <th scope="col">Owner Phone Number</th>
             <th scope="col">Owner Alternate Phone Number</th>
             <th scope="col">Residence Location</th>
             <th scope="col">Residence Country-City</th>
+
           </tr>
           </thead>
           <tbody id="table-body-reservations">
@@ -204,111 +216,72 @@
     }
     return null;
   }
-  function generateReservationRow(reservation) {
+  async function generateReservationRow(reservation) {
     const row = document.createElement("tr");
-
-
-
-
-
-
-
 
     const reservationId = reservation.id;
     const residenceId = reservation.number;
     const ownerEmail = reservation.ownerEmail;
-    const ownerPhoneNumber = '123-456-7890';
-    const ownerAlternatePhoneNumber = '987-654-3210';
-    const residenceLocation = 'Sample Location';
-    const residenceCountryCity = 'Sample Country, Sample City';
 
-// Create the reservationData array with the assigned values
-    const reservationData = [
-      reservationId,
-      residenceId,
-      ownerEmail,
-      ownerPhoneNumber,
-      ownerAlternatePhoneNumber,
-      residenceLocation,
-      residenceCountryCity
-    ];
+    try {
+      const userResponse = await $.ajax({
+        url: "http://localhost:9090/user/getUser",
+        data: { email: reservation.ownerEmail },
+        type: "GET",
+      });
 
-    $.ajax({
-      url: "http://localhost:9090/user/getUser",
-      data: {email:reservation.ownerEmail},
-      type: "GET",
-      success: function (response) {
-reservationData.ownerPhoneNumber=response.phoneNumber;
-reservationData.ownerAlternatePhoneNumber =response.alternatePhoneNumber;
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
+      const residenceResponse = await $.ajax({
+        url: "http://localhost:9090/residence/test",
+        data: { id: residenceId },
+        type: "GET",
+      });
 
+      const ownerPhoneNumber = userResponse.phoneNumber;
+      const ownerAlternatePhoneNumber = userResponse.alternatePhoneNumber;
+      const residenceLocation = residenceResponse.location;
+      const residenceCountryCity = residenceResponse.country + ", " + residenceResponse.city;
+      const resrvationDate=reservation.date
+      const reservationData = [
+        reservationId,
+        residenceId,
+        resrvationDate,
+        ownerEmail,
+        ownerPhoneNumber,
+        ownerAlternatePhoneNumber,
+        residenceLocation,
+        residenceCountryCity,
+      ];
 
+      reservationData.forEach((item) => {
+        const cell = document.createElement("td");
+        cell.textContent = item;
+        row.appendChild(cell);
+      });
 
-
-    $.ajax({
-      url: "http://localhost:9090/residence/test",
-      data: {id:residenceId},
-      type: "GET",
-      success: function (response) {
-reservationData.residenceLocation=response.location;
-reservationData.residenceCountryCity=response.country+", "+ response.city
-
-
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-
-
-
-
-
-    reservationData.forEach(item => {
-      const cell = document.createElement("td");
-      cell.textContent = item;
-      row.appendChild(cell);
-    });
-
-    // Add a checkbox for each row if needed
-    const checkboxCell = document.createElement("td");
-    const checkboxLabel = document.createElement("label");
-    checkboxLabel.classList.add("control", "control--checkbox");
-    const checkboxInput = document.createElement("input");
-    checkboxInput.type = "checkbox";
-    checkboxLabel.appendChild(checkboxInput);
-    const checkboxIndicator = document.createElement("div");
-    checkboxIndicator.classList.add("control__indicator");
-    checkboxLabel.appendChild(checkboxIndicator);
-    checkboxCell.appendChild(checkboxLabel);
-    row.appendChild(checkboxCell);
-
-    return row;
-  }
-
-  // ... Rest of the code ...
-
-  $.ajax({
-    url: "http://localhost:9090/rent/getTenantReservations",
-    data: {email:getCookie('userEmail')},
-    type: "GET",
-    success: function (response) {
-      const tableBodyReservations = document.getElementById("table-body-reservations"); // Get the reservation table's body
-      for (let i = 0; i < response.length; i++) {
-        const newRow = generateReservationRow(response[i]); // Generate the row using the reservation data
-        tableBodyReservations.appendChild(newRow); // Add the row to the reservation table
-      }
-    },
-    error: function (error) {
+      return row; // Return the row element
+    } catch (error) {
       console.log(error);
     }
-  });
+  }
+  // ... Rest of the code ...
 
+  async function loadReservations() {
+    try {
+      const response = await $.ajax({
+        url: "http://localhost:9090/rent/getTenantReservations",
+        data: { email: getCookie("userEmail") },
+        type: "GET",
+      });
 
+      const tableBodyReservations = document.getElementById("table-body-reservations");
+      for (const reservation of response) {
+        const newRow = await generateReservationRow(reservation); // Wait for each row generation
+        tableBodyReservations.appendChild(newRow);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   $.ajax({
     url: "http://localhost:9090/user/getUser",
@@ -325,6 +298,8 @@ document.getElementById('tenantInfo').textContent="These are the reservations fo
       console.log(error);
     }
   });
+
+  loadReservations();
 
 
 </script>
