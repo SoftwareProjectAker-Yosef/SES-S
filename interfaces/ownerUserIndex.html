@@ -107,11 +107,17 @@
     <input type="radio" id="banner3" class="sec-1-input" name="banner">
     <input type="radio" id="banner4" class="sec-1-input" name="banner">
     <div class="slider">
+
+
+
+
+
+
       <div id="top-banner-1" class="banner">
         <div class="banner-inner-wrapper header-text">
           <div class="main-caption">
             <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-            <h1>Caribbean</h1>
+            <h1 id="country"></h1>
             <div class="border-button"><a href="../wooxtravel-1.0.0/about.html">Go There</a></div>
           </div>
           <div class="container">
@@ -121,15 +127,15 @@
                   <div class="row">
                     <div class="col-lg-3 col-sm-6 col-6">
                       <i class="fa fa-user"></i>
-                      <h4><span>Population:</span><br>44.48 M</h4>
+                      <h4><span>City</span><br><span id="city">City Name</span></h4>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-6">
                       <i class="fa fa-globe"></i>
-                      <h4><span>Territory:</span><br>275.400 KM<em>2</em></h4>
+                      <h4><span>Area:</span><br><span id="area">Area Size</span> M<em>2</em></h4>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-6">
                       <i class="fa fa-home"></i>
-                      <h4><span>AVG Price:</span><br>$946.000</h4>
+                      <h4><span>Price:</span><br><span id="price">Property Price</span></h4>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-6">
                       <div class="main-button">
@@ -572,10 +578,13 @@
     type: "GET",
 
     success: function (response) {
-      for (let i = 0; i < response.length; i++){
-console.log("property number "+i)
-       console.log(response[i]);
-     }
+      document.getElementById('top-banner-1').style.backgroundImage = `url(${response[0].images[0]})`;
+document.getElementById('area').textContent=response[0].area
+
+//       for (let i = 0; i < response.length; i++){
+// console.log("property number "+i)
+//        console.log(response[i]);
+//      }
     },
     error: function (error) {
       console.log(error);

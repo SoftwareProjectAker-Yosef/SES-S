@@ -41,14 +41,14 @@
           <div class="row">
           </div>
           <label class="fieldlabels">Email Tenant: *</label>
-          <input type="email" id="email1" name="email1" placeholder="Email Tenant" oninput="validateEmail()"/>
+          <input type="email" id="email1" name="email1" placeholder="Email Tenant" readonly/>
           <p id="emailError" style="color: red"></p>
 
           <label class="fieldlabels">Email Owner: *</label>
-          <input type="email" id="email2" name="email2" placeholder="Email Owner" />
+          <input type="email" id="email2" name="email2" placeholder="Email Owner" readonly />
 
           <label class="fieldlabels">Number: *</label>
-          <input type="number" id="number" name="number" placeholder="ID" />
+          <input type="number" id="number" name="number" placeholder="ID" readonly />
 
           <label class="fieldlabels">Rent Date: *</label> <input type="month" name="rentDate" id="rentDate" onchange="checkMonth()" placeholder="RentDate"   />
 
@@ -450,6 +450,12 @@ section class="intro-single">
       document.getElementById("baths").textContent=response.bathrooms;
       document.getElementById("beds").textContent=response.bedrooms;
       document.getElementById("area").textContent=response.area+" m2";
+      document.getElementById("email2").value=response.ownerEmail;
+      document.getElementById("number").value=response.id;
+      document.getElementById("email1").value=getCookie('userEmail');
+
+
+
 
       const ulElement = document.querySelector('.amenities-list .list-a');
 
@@ -518,6 +524,24 @@ section class="intro-single">
       console.log(Error);
     },
   });
+
+
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+      if (c.indexOf(nameEQ) === 0) {
+        return decodeURIComponent(c.substring(nameEQ.length, c.length));
+      }
+    }
+    return null;
+  }
+
 </script>
 
 
