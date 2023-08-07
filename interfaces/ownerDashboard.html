@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Sakancom</title>
+  <link href="../resources/public_html/assets/img/loyintlogos/logow.svg" rel="icon">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'><link rel="stylesheet" href="../multi-step-form/dist/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../resources/css-table-15/fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="../resources/css-table-15/css/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../resources/css-table-15/css/bootstrap.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="../resources/css-table-15/css/style.css">
+
+
+
+  <style>
+    /* Custom CSS to adjust the height of the first column cells */
+    .custom-table th,
+    .custom-table td {
+      vertical-align: middle;
+    }
+
+    /* Custom CSS for table container */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+  </style>
+
+
+</head>
+<body style="padding-top: 9.1rem;">
+
+
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top " style="position: absolute; background-color: #22b3c1; height: 9.1rem; font-family: 'Poppins', sans-serif;"  >
+  <div class="container">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+            aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a href="ownerUserIndex.html" class="logo">
+      <img src="Screenshot_2023-07-02_at_13.13.32-removebg.png" alt="" style="width: 250px; margin-left: 5rem ">
+    </a>
+    <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
+            data-target="#navbarTogglerDemo01" aria-expanded="false">
+      <span class="fa fa-search" aria-hidden="true"></span>
+    </button>
+    <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+      <ul class="navbar-nav" >
+        <li class="nav-item">
+          <a class="nav-link" href="viewOwnerHouses.html" style="margin-left: 10px; margin-right: 10px; color: #FFFFFF; font-size: larger">Residences</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="ownerUserIndex.html" style="margin-left: 10px; margin-right: 10px;color: #FFFFFF;font-size: larger">Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="HomePage.html" style="margin-left: 10px; margin-right: 10px; ">Log Out</a>
+        </li>
+
+
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+<div class="content">
+
+  <div class="container">
+
+    <div class="container">
+      <!-- Add your paragraph here -->
+      <br>
+      <br>
+      <br>
+      <p class="styled-paragraph">Welcome to the owner reservations page! This page allows you to manage and view your reservations made on yor residences conveniently. Here, you can find detailed information about your reservations as well as your past and present tenants. Stay organized and informed by accessing important details such as reservation dates, and property information. If you want to review your reservation history, this page provides you with all the necessary information to make your experience seamless and enjoyable.</p>
+
+      <br>
+      <br>
+      <p class="styled-paragraph" id="tenantInfo"></p>
+
+
+
+
+      <br>
+      <div class="table-responsive custom-table-responsive">
+        <table class="table custom-table">
+          <thead>
+          <tr>
+
+
+
+            </th>
+            <th scope="col">Reservation ID</th>
+            <th scope="col">Residence ID</th>
+            <th scope="col">Tenant Email</th>
+            <th scope="col">Tenant Phone Number</th>
+            <th scope="col">Tenant Alternate Phone Number</th>
+            <th scope="col">Date of Reservation</th>
+            <th scope="col">View</th>
+
+          </tr>
+          </thead>
+          <tbody id="table-body-reservations">
+          <!-- Rows will be dynamically generated here for reservations -->
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <br>
+      <p class="styled-paragraph" id="evictionTime"></p>
+    </div>
+
+  </div>
+</div>
+<footer class="footer-distributed">
+
+  <div class="footer-left">
+
+    <a  class="logo">
+      <img src="Screenshot_2023-07-02_at_13.13.32-removebg.png" alt="" style="width: 250px;  ">
+    </a>
+
+
+
+    <p class="footer-company-name" style="color: #FFFFFF;padding-top: 3rem ">Sakancom © 2023</p>
+  </div>
+
+  <div class="footer-center">
+
+    <div>
+      <i class="fa fa-map-marker"></i>
+      <p><span>Rafedyia Street</span> Nablus, Palestine</p>
+    </div>
+
+    <div>
+      <i class="fa fa-phone"></i>
+      <p>+972595254709</p> </br>
+      <p style="padding-left: 4.5rem">+970598666558</p>
+    </div>
+
+    <div>
+      <i class="fa fa-envelope"></i>
+      <p><a href="mailto:yossalam261@gmail.com">yossalam261@gmail.com</a></p></br>
+      <p style="padding-left: 4.5rem"><a href="mailto:mohammadaker7@gmail.com">mohammadaker7@gmail.com</a></p>
+    </div>
+
+  </div>
+
+  <div class="footer-right">
+
+    <p class="footer-company-about">
+      <span>About the company</span>
+      Sakancom offers a diverse range of rental properties to suit every budget. With a commitment to service and transparency, we make finding your perfect home easy and enjoyable
+    </p>
+
+    <div class="footer-icons">
+
+      <a href="https://www.facebook.com/yusuf.salam.568/"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/YoSSalam2"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/yossalam8/"><i class="fa fa-linkedin"></i></a>
+      <a href="https://github.com/YoSSalam8"><i class="fa fa-github"></i></a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<script src="../resources/css-table-15/js/jquery-3.3.1.min.js"></script>
+<script src="../resources/css-table-15/js/popper.min.js"></script>
+<script src="../resources/css-table-15/js/bootstrap.min.js"></script>
+<script src="../resources/css-table-15/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  // ... Rest of the code ...
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+      if (c.indexOf(nameEQ) === 0) {
+        return decodeURIComponent(c.substring(nameEQ.length, c.length));
+      }
+    }
+    return null;
+  }
+  async function generateReservationRow(reservation) {
+    const row = document.createElement("tr");
+
+    const reservationId = reservation.id;
+    const residenceId = reservation.number;
+    const tenantEmail = reservation.email;
+
+    try {
+      const userResponse = await $.ajax({
+        url: "http://localhost:9090/user/getUser",
+        data: { email: reservation.email },
+        type: "GET",
+      });
+
+      const tenantPhoneNumber = userResponse.phoneNumber;
+      const tenantAlternatePhoneNumber = userResponse.alternatePhoneNumber;
+      const resrvationDate = reservation.date;
+      const reservationData = [
+        reservationId,
+        residenceId,
+        tenantEmail,
+        tenantPhoneNumber,
+        tenantAlternatePhoneNumber,
+        resrvationDate,
+        "", // The "View" button will be added dynamically
+      ];
+
+      reservationData.forEach((item, index) => {
+        const cell = document.createElement(index === 6 ? "td" : "th");
+        cell.textContent = item;
+        row.appendChild(cell);
+      });
+
+      // Add the "View" button to the last cell
+      const viewButton = document.createElement("button");
+      viewButton.textContent = "View";
+      viewButton.classList.add("btn", "btn-primary", "btn-sm"); // Add Bootstrap classes
+      viewButton.addEventListener("click", () => {
+       localStorage.setItem('propertyID',residenceId);
+       window.location.href='viewPropertyOwner.html'
+      });
+      row.cells[6].appendChild(viewButton);
+
+      return row; // Return the row element
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // ... Rest of the code ...
+
+  async function loadReservations() {
+    try {
+      const response = await $.ajax({
+        url: "http://localhost:9090/rent/getOwnerReservations",
+        data: { email: getCookie("userEmail") },
+        type: "GET",
+      });
+
+      const tableBodyReservations = document.getElementById("table-body-reservations");
+      for (const reservation of response) {
+        const newRow = await generateReservationRow(reservation); // Wait for each row generation
+        tableBodyReservations.appendChild(newRow);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  $.ajax({
+    url: "http://localhost:9090/user/getUser",
+    data: {email:getCookie('userEmail')},
+    type: "GET",
+    success: function (response) {
+
+      document.getElementById('tenantInfo').textContent="These are the reservations for the owner with an email of :"+ getCookie('userEmail')+ " and a phone number of :"+ response.phoneNumber;
+
+      document.getElementById('evictionTime').textContent="Please note that your residences can begin their staying in the first of each month and the eviction time is in the 30th of that same month. Please note that the paying tie is once you hand them the property, that means it is in the first of each month.";
+
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+
+  loadReservations();
+
+
+</script>
+</body>
+</html>
