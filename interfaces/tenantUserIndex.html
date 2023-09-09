@@ -47,6 +47,11 @@
 
 <body>
 
+
+<script>
+  var idForProperty1,idForProperty2,idForProperty3,idForProperty4;
+</script>
+
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -143,7 +148,7 @@
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="viewPropertyOwner.html"  class="link-a" onclick="viewProperty(${propertyData.idNum})">Explore More</a>
+                          <a href="property-single.html"  class="link-a" onclick="viewProperty(idForProperty1)">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -178,7 +183,7 @@
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="viewPropertyOwner.html"  class="link-a" onclick="viewProperty(${propertyData.idNum})">Explore More</a>
+                          <a href="property-single.html"  class="link-a" onclick="viewProperty(idForProperty2)">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -213,7 +218,7 @@
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="viewPropertyOwner.html"  class="link-a" onclick="viewProperty(${propertyData.idNum})">Explore More</a>
+                          <a href="property-single.html"  class="link-a" onclick="viewProperty(idForProperty3)">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -248,7 +253,7 @@
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="viewPropertyOwner.html"  class="link-a" onclick="viewProperty(${propertyData.idNum})">Explore More</a>
+                          <a href="property-single.html"  class="link-a" onclick="viewProperty(idForProperty4)">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -419,7 +424,11 @@
       bannerTimer = setInterval(bannerSwitcher, 5000)
     });
 
+    function viewProperty(propertyId) {
+      console.log("Property ID clicked:", propertyId);
+      localStorage.setItem('propertyID', propertyId);
 
+    }
     $(document).ready(function() {
       // Function to fetch residences data
       function fetchResidences() {
@@ -567,7 +576,7 @@
         document.getElementById('price').textContent=response[0].area+""
         document.getElementById('city').textContent=response[0].price+"$"
         document.getElementById('country').textContent=response[0].country
-        var idForProperty1=response[0].id
+         idForProperty1=response[0].id
 
 
 
@@ -576,23 +585,23 @@
         document.getElementById('price1').textContent=response[1].area+""
         document.getElementById('city1').textContent=response[1].price+"$"
         document.getElementById('country1').textContent=response[1].country
-        var idForProperty2=response[1].id
+         idForProperty2=response[1].id
 
 
         document.getElementById('top-banner-3').style.backgroundImage = `url(${response[2].images[0]})`;
-        document.getElementById('area2').textContent=response[1].city
-        document.getElementById('price2').textContent=response[1].area+""
-        document.getElementById('city2').textContent=response[1].price+"$"
-        document.getElementById('country2').textContent=response[1].country
-        var idForProperty3=response[2].id
+        document.getElementById('area2').textContent=response[2].city
+        document.getElementById('price2').textContent=response[2].area+""
+        document.getElementById('city2').textContent=response[2].price+"$"
+        document.getElementById('country2').textContent=response[2].country
+         idForProperty3=response[2].id
 
 
         document.getElementById('top-banner-4').style.backgroundImage = `url(${response[3].images[0]})`;
-        document.getElementById('area3').textContent=response[1].city
-        document.getElementById('price3').textContent=response[1].area+""
-        document.getElementById('city3').textContent=response[1].price+"$"
-        document.getElementById('country3').textContent=response[1].country
-        var idForProperty4=response[3].id
+        document.getElementById('area3').textContent=response[3].city
+        document.getElementById('price3').textContent=response[3].area+""
+        document.getElementById('city3').textContent=response[3].price+"$"
+        document.getElementById('country3').textContent=response[3].country
+         idForProperty4=response[3].id
 
 
 //       for (let i = 0; i < response.length; i++){
