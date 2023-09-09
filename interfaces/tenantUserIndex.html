@@ -573,7 +573,7 @@
       success: function (response) {
         document.getElementById('top-banner-1').style.backgroundImage = `url(${response[0].images[0]})`;
         document.getElementById('area').textContent=response[0].city
-        document.getElementById('price').textContent=response[0].area+""
+        document.getElementById('price').textContent=response[0].area+"M2"
         document.getElementById('city').textContent=response[0].price+"$"
         document.getElementById('country').textContent=response[0].country
          idForProperty1=response[0].id
@@ -582,13 +582,14 @@
 
         document.getElementById('top-banner-2').style.backgroundImage = `url(${response[1].images[0]})`;
         document.getElementById('area1').textContent=response[1].city
-        document.getElementById('price1').textContent=response[1].area+""
+        document.getElementById('price1').textContent=response[1].area+"M2"
         document.getElementById('city1').textContent=response[1].price+"$"
         document.getElementById('country1').textContent=response[1].country
          idForProperty2=response[1].id
 
 
         document.getElementById('top-banner-3').style.backgroundImage = `url(${response[2].images[0]})`;
+
         document.getElementById('area2').textContent=response[2].city
         document.getElementById('price2').textContent=response[2].area+""
         document.getElementById('city2').textContent=response[2].price+"$"
@@ -602,6 +603,10 @@
         document.getElementById('city3').textContent=response[3].price+"$"
         document.getElementById('country3').textContent=response[3].country
          idForProperty4=response[3].id
+
+  
+
+
 
 
 //       for (let i = 0; i < response.length; i++){
